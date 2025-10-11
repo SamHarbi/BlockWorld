@@ -1,7 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/BlockWorld.dir/link.d"
-  "BlockWorld"
-  "BlockWorld.pdb"
   "CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o"
   "CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o.d"
   "CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o"
@@ -14,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/BlockWorld.dir/src/glad.c.o.d"
   "CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o"
   "CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o.d"
+  "build/BlockWorld.html"
+  "build/BlockWorld.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -8,5 +8,13 @@ add_executable(BlockWorld src/BlockWorld.cpp src/ChunkBlock.cpp src/cube_tex.cpp
 target_include_directories(BlockWorld PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/)
 target_link_libraries( BlockWorld )
 
-find_package(glfw3 3.3 REQUIRED)
-target_link_libraries(BlockWorld glfw)
+# Emscripten-specific configurations
+set(USE_GLFW_PORT_FLAGS "-sUSE_GLFW=3")
+set(PACK_FILES "--embed-file")
+set(FILES_TO_PACK "src/Assets@/")
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_GLFW_PORT_FLAGS} ${PACK_FILES} ${FILES_TO_PACK}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_GLFW_PORT_FLAGS} ${PACK_FILES} ${FILES_TO_PACK} -sFULL_ES2 -sFULL_ES3")
+
+# Set executable suffix for web targets
+set(CMAKE_EXECUTABLE_SUFFIX .html)

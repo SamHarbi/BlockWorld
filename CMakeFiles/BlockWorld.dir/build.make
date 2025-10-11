@@ -73,88 +73,94 @@ CMakeFiles/BlockWorld.dir/codegen:
 .PHONY : CMakeFiles/BlockWorld.dir/codegen
 
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: CMakeFiles/BlockWorld.dir/includes_CXX.rsp
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: src/BlockWorld.cpp
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o -MF CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o -MF CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp
 
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp > CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp > CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.i
 
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp -o CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp -o CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.s
 
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: CMakeFiles/BlockWorld.dir/includes_CXX.rsp
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: src/ChunkBlock.cpp
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o -MF CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o -MF CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp
 
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp > CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp > CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.i
 
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp -o CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp -o CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.s
 
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: CMakeFiles/BlockWorld.dir/includes_CXX.rsp
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: src/cube_tex.cpp
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o -MF CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o -MF CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp
 
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp > CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp > CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.i
 
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp -o CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp -o CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.s
 
 CMakeFiles/BlockWorld.dir/src/glad.c.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/glad.c.o: CMakeFiles/BlockWorld.dir/includes_C.rsp
 CMakeFiles/BlockWorld.dir/src/glad.c.o: src/glad.c
 CMakeFiles/BlockWorld.dir/src/glad.c.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/BlockWorld.dir/src/glad.c.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/glad.c.o -MF CMakeFiles/BlockWorld.dir/src/glad.c.o.d -o CMakeFiles/BlockWorld.dir/src/glad.c.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/glad.c.o -MF CMakeFiles/BlockWorld.dir/src/glad.c.o.d -o CMakeFiles/BlockWorld.dir/src/glad.c.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c
 
 CMakeFiles/BlockWorld.dir/src/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/BlockWorld.dir/src/glad.c.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c > CMakeFiles/BlockWorld.dir/src/glad.c.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c > CMakeFiles/BlockWorld.dir/src/glad.c.i
 
 CMakeFiles/BlockWorld.dir/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/BlockWorld.dir/src/glad.c.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c -o CMakeFiles/BlockWorld.dir/src/glad.c.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c -o CMakeFiles/BlockWorld.dir/src/glad.c.s
 
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: CMakeFiles/BlockWorld.dir/includes_CXX.rsp
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: src/ModelLoader/tiny_loader_texture.cpp
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o -MF CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o -MF CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp
 
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp > CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp > CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.i
 
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp -o CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp -o CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.s
 
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: CMakeFiles/BlockWorld.dir/flags.make
+CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: CMakeFiles/BlockWorld.dir/includes_CXX.rsp
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: src/wrapper_glfw.cpp
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: CMakeFiles/BlockWorld.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o -MF CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o -MF CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o.d -o CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o -c /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp
 
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.i"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp > CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.i
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp > CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.i
 
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.s"
-	/nix/store/kaj8d1zcn149m40s9h0xi0khakibiphz-gcc-wrapper-14.3.0/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp -o CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.s
+	/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp -o CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.s
 
 # Object files for target BlockWorld
 BlockWorld_OBJECTS = \
@@ -168,21 +174,20 @@ BlockWorld_OBJECTS = \
 # External object files for target BlockWorld
 BlockWorld_EXTERNAL_OBJECTS =
 
-BlockWorld: CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
-BlockWorld: CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o
-BlockWorld: CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o
-BlockWorld: CMakeFiles/BlockWorld.dir/src/glad.c.o
-BlockWorld: CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o
-BlockWorld: CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
-BlockWorld: CMakeFiles/BlockWorld.dir/build.make
-BlockWorld: CMakeFiles/BlockWorld.dir/compiler_depend.ts
-BlockWorld: /nix/store/w1si1zbp9f5zjbk8r7bcqm0n8kdla15i-glfw-3.4/lib/libglfw.so.3.4
-BlockWorld: CMakeFiles/BlockWorld.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable BlockWorld"
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/glad.c.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/build.make
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/objects1.rsp
+build/BlockWorld.html: CMakeFiles/BlockWorld.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable build/BlockWorld.html"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BlockWorld.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/BlockWorld.dir/build: BlockWorld
+CMakeFiles/BlockWorld.dir/build: build/BlockWorld.html
 .PHONY : CMakeFiles/BlockWorld.dir/build
 
 CMakeFiles/BlockWorld.dir/clean:

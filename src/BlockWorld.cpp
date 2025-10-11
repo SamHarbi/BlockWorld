@@ -49,9 +49,7 @@ GLuint program[numOfPrograms];		/* Identifiers for the shader prgorams */
 GLuint vao;			/* Vertex array (Containor) object. This is the index of the VAO that will be the container for
 					   our buffer objects */
 
-GLuint colourmode;	/* Index of a uniform to switch the colour mode in the vertex shader
-					  I've included this to show you how to pass in an unsigned integer into
-					  your vertex shader. */
+int colourmode;
 
 					  /* Position and view globals */
 GLfloat angle_x, angle_inc_x, x, scaler, z, y;
@@ -74,7 +72,7 @@ GLfloat cam_z_mod;
 
 /* Uniforms*/
 GLuint modelID[numOfPrograms], viewID[numOfPrograms], projectionID[numOfPrograms];
-GLuint colourmodeID[numOfPrograms];
+int colourmodeID[numOfPrograms];
 GLuint lightviewID[2];
 GLuint drawmode;			// Defines drawing mode as points, lines or filled polygons
 GLfloat aspect_ratio;		/* Aspect ratio of the window defined in the reshape callback*/
@@ -287,14 +285,18 @@ void init(GLWrapper* glw)
 
 	heightmod = 10;
 
+	cout << "About to gen vertex arrays" << endl;
+
 	// Generate index (name) for one vertex array object
 	glGenVertexArrays(1, &vao);
 
 	// Create the vertex array object and make it current
 	glBindVertexArray(vao);
 
+	cout << "About to make cubes" << endl; //
+
 	/* Create a Chunk Block and Skybox Cube */
-	cube.makeCube();
+	cube.makeCube(); //
 	chunkblock.makeChunkBlock();
 
 	cout << "loading models.." << endl;
@@ -307,7 +309,7 @@ void init(GLWrapper* glw)
 	tree1.load_obj("Models/SM_Env_TreePine_03.obj");
 	tree2.load_obj("Models/SM_Env_Tree_01.obj");
 
-	cout << "models loaded" << endl;
+	cout << "models loaded" << endl; //
 
 	//Create initial terrain megachunk positions using inital position
 	generateMegaChunk(true, chunkOrigin);
@@ -336,7 +338,7 @@ void init(GLWrapper* glw)
 			cout << "Caught exception: " << e.what() << endl;
 			cin.ignore();
 			exit(0);
-		}
+		}//
 
 		/* Define uniforms to send to vertex shader */
 		modelID[i] = glGetUniformLocation(program[i], "model");
@@ -431,7 +433,7 @@ void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoader tre
 	model.push(mat4(1.0f));
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1ui(colourmodeID[2], colourmode);
+	glUniform1i(colourmodeID[2], colourmode);
 	glUniformMatrix4fv(viewID[2], 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionID[2], 1, GL_FALSE, &projection[0][0]);
 	glUniformMatrix4fv(lightviewID[1], 1, GL_FALSE, &lightview[0][0]);
@@ -494,7 +496,7 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	model.push(mat4(1.0f));
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1ui(colourmodeID[0], colourmode);
+	glUniform1i(colourmodeID[0], colourmode);
 	glUniformMatrix4fv(viewID[0], 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionID[0], 1, GL_FALSE, &projection[0][0]);
 	glUniformMatrix4fv(lightviewID[0], 1, GL_FALSE, &lightview[0][0]);
@@ -569,7 +571,7 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 	);
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1ui(colourmodeID[1], colourmode);
+	glUniform1i(colourmodeID[1], colourmode);
 	glUniformMatrix4fv(viewID[1], 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionID[1], 1, GL_FALSE, &projection[0][0]);
 
@@ -737,13 +739,13 @@ int main(int argc, char* argv[])
 	glw->setKeyCallback(keyCallback);
 	glw->setReshapeCallback(reshape);
 
-	cout << "[Passed 0]" << endl;
+	cout << "[Passed 0.0]" << endl;
 
 	init(glw);
 
 	cout << "[Passed 1]" << endl;
 
-	glw->eventLoop();
+	glw->eventLoop(); //
 
 	cout << "[Passed 2]" << endl;
 
