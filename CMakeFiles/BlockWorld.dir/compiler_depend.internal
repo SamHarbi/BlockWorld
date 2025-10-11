@@ -4,7 +4,6 @@
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.cpp
  /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/assert.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
@@ -686,6 +685,7 @@ CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
  /home/sameer/.emscripten_cache/sysroot/include/wchar.h
  /home/sameer/.emscripten_cache/sysroot/include/wctype.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/matrix.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/detail/type_mat2x2.hpp
@@ -995,7 +995,6 @@ CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.cpp
  /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/assert.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
@@ -1661,6 +1660,7 @@ CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
  /home/sameer/.emscripten_cache/sysroot/include/wchar.h
  /home/sameer/.emscripten_cache/sysroot/include/wctype.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/matrix.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/detail/type_mat2x2.hpp
@@ -1884,7 +1884,6 @@ CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.cpp
  /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/assert.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
@@ -2539,6 +2538,7 @@ CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
  /home/sameer/.emscripten_cache/sysroot/include/wchar.h
  /home/sameer/.emscripten_cache/sysroot/include/wctype.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/matrix.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/detail/type_mat2x2.hpp
@@ -2737,7 +2737,6 @@ CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/cube_tex.cpp
  /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/assert.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
@@ -3329,6 +3328,7 @@ CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
  /home/sameer/.emscripten_cache/sysroot/include/wchar.h
  /home/sameer/.emscripten_cache/sysroot/include/wctype.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/matrix.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/detail/type_mat2x2.hpp
@@ -3525,7 +3525,6 @@ CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o
 
 CMakeFiles/BlockWorld.dir/src/glad.c.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/glad.c
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/stdint.h
@@ -3542,7 +3541,6 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/string.h
  /home/sameer/.emscripten_cache/sysroot/include/compat/stdlib.h
  /home/sameer/.emscripten_cache/sysroot/include/compat/string.h
- /home/sameer/.emscripten_cache/sysroot/include/dlfcn.h
  /home/sameer/.emscripten_cache/sysroot/include/features.h
  /home/sameer/.emscripten_cache/sysroot/include/stddef.h
  /home/sameer/.emscripten_cache/sysroot/include/stdint.h
@@ -3551,6 +3549,7 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o
  /home/sameer/.emscripten_cache/sysroot/include/string.h
  /home/sameer/.emscripten_cache/sysroot/include/strings.h
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stddef_header_macro.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stddef_max_align_t.h
@@ -3565,7 +3564,6 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.cpp
  /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h
- /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h
  /home/sameer/.emscripten_cache/sysroot/include/alloca.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h
  /home/sameer/.emscripten_cache/sysroot/include/bits/errno.h
@@ -4212,6 +4210,7 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h
  /home/sameer/.emscripten_cache/sysroot/include/wchar.h
  /home/sameer/.emscripten_cache/sysroot/include/wctype.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h
  /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stdarg___gnuc_va_list.h

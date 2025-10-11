@@ -157,13 +157,13 @@ void TinyObjLoader::drawObject(int drawmode)
 	glBindBuffer(GL_ARRAY_BUFFER, texCoordsObject);
 	glVertexAttribPointer(attribute_v_texcoord, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glPointSize(3.f);
+	//glPointSize(3.f);
 
 	// Enable this line to show model in wireframe
-	if (drawmode == 1)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//if (drawmode == 1)
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//else
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	if (drawmode == 2)
 	{

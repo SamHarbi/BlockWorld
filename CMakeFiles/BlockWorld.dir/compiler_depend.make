@@ -3,7 +3,6 @@
 
 CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: src/BlockWorld.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/assert.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
@@ -685,6 +684,7 @@ CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: src/BlockWorld.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
   /home/sameer/.emscripten_cache/sysroot/include/wchar.h \
   /home/sameer/.emscripten_cache/sysroot/include/wctype.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   include/glm/matrix.hpp \
   include/glm/detail/type_mat2x2.hpp \
@@ -993,7 +993,6 @@ CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o: src/BlockWorld.cpp \
 
 CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: src/ChunkBlock.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/assert.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
@@ -1659,6 +1658,7 @@ CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: src/ChunkBlock.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
   /home/sameer/.emscripten_cache/sysroot/include/wchar.h \
   /home/sameer/.emscripten_cache/sysroot/include/wctype.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   include/glm/matrix.hpp \
   include/glm/detail/type_mat2x2.hpp \
@@ -1881,7 +1881,6 @@ CMakeFiles/BlockWorld.dir/src/ChunkBlock.cpp.o: src/ChunkBlock.cpp \
 
 CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: src/ModelLoader/tiny_loader_texture.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/assert.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
@@ -2536,6 +2535,7 @@ CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: src/ModelLo
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
   /home/sameer/.emscripten_cache/sysroot/include/wchar.h \
   /home/sameer/.emscripten_cache/sysroot/include/wctype.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   include/glm/matrix.hpp \
   include/glm/detail/type_mat2x2.hpp \
@@ -2733,7 +2733,6 @@ CMakeFiles/BlockWorld.dir/src/ModelLoader/tiny_loader_texture.cpp.o: src/ModelLo
 
 CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: src/cube_tex.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/assert.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
@@ -3325,6 +3324,7 @@ CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: src/cube_tex.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
   /home/sameer/.emscripten_cache/sysroot/include/wchar.h \
   /home/sameer/.emscripten_cache/sysroot/include/wctype.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   include/glm/matrix.hpp \
   include/glm/detail/type_mat2x2.hpp \
@@ -3520,7 +3520,6 @@ CMakeFiles/BlockWorld.dir/src/cube_tex.cpp.o: src/cube_tex.cpp \
   /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stdint.h
 
 CMakeFiles/BlockWorld.dir/src/glad.c.o: src/glad.c \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/stdint.h \
@@ -3537,7 +3536,6 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o: src/glad.c \
   /home/sameer/.emscripten_cache/sysroot/include/c++/v1/string.h \
   /home/sameer/.emscripten_cache/sysroot/include/compat/stdlib.h \
   /home/sameer/.emscripten_cache/sysroot/include/compat/string.h \
-  /home/sameer/.emscripten_cache/sysroot/include/dlfcn.h \
   /home/sameer/.emscripten_cache/sysroot/include/features.h \
   /home/sameer/.emscripten_cache/sysroot/include/stddef.h \
   /home/sameer/.emscripten_cache/sysroot/include/stdint.h \
@@ -3546,6 +3544,7 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o: src/glad.c \
   /home/sameer/.emscripten_cache/sysroot/include/string.h \
   /home/sameer/.emscripten_cache/sysroot/include/strings.h \
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stddef_header_macro.h \
   /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stddef_max_align_t.h \
@@ -3559,7 +3558,6 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o: src/glad.c \
 
 CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: src/wrapper_glfw.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/GLFW/glfw3.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
   /home/sameer/.emscripten_cache/sysroot/include/alloca.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/alltypes.h \
   /home/sameer/.emscripten_cache/sysroot/include/bits/errno.h \
@@ -4206,6 +4204,7 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: src/wrapper_glfw.cpp \
   /home/sameer/.emscripten_cache/sysroot/include/wasi/api.h \
   /home/sameer/.emscripten_cache/sysroot/include/wchar.h \
   /home/sameer/.emscripten_cache/sysroot/include/wctype.h \
+  include/KHR/khrplatform.h \
   include/glad/glad.h \
   src/wrapper_glfw.h \
   /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stdarg___gnuc_va_list.h \
@@ -4229,8 +4228,6 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: src/wrapper_glfw.cpp \
 
 
 src/wrapper_glfw.cpp:
-
-/home/sameer/.emscripten_cache/sysroot/include/dlfcn.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/map:
 
@@ -4448,6 +4445,8 @@ include/glm/detail/type_mat2x2.hpp:
 
 include/glm/matrix.hpp:
 
+include/KHR/khrplatform.h:
+
 /home/sameer/.emscripten_cache/sysroot/include/wctype.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/wchar.h:
@@ -4640,8 +4639,6 @@ include/glm/ext/matrix_transform.hpp:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/remove_extent.h:
 
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/remove_const_ref.h:
-
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__iterator/bounded_iter.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/cfloat:
@@ -4701,6 +4698,10 @@ include/glm/gtc/epsilon.inl:
 /home/sameer/.emscripten_cache/sysroot/include/alloca.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__functional/unary_negate.h:
+
+include/glm/ext/quaternion_transform.inl:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__iterator/incrementable_traits.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__random/extreme_value_distribution.h:
 
@@ -5024,11 +5025,13 @@ include/glm/ext/quaternion_trigonometric.inl:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__atomic/memory_order.h:
 
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__bit/countl.h:
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/operations.h:
 
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__bit/bit_log2.h:
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/pop_heap.h:
 
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__string/extern_template_lists.h:
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/allocate_at_least.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/uninitialized_algorithms.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/max.h:
 
@@ -5051,6 +5054,30 @@ include/glm/detail/type_mat3x3.hpp:
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/cctype:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/for_each_n.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/none_of.h:
+
+/nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stdarg_va_copy.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__atomic/atomic_init.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/sort_heap.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__fwd/istream.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/inplace_merge.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/is_standard_layout.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/pointer_traits.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/cwctype:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__ranges/view_interface.h:
+
+src/cube_tex.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/is_permutation.h:
 
 src/ChunkBlock.h:
 
@@ -5132,29 +5159,9 @@ include/glm/detail/type_quat.hpp:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/unique.h:
 
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/none_of.h:
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/half_positive.h:
 
-/nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stdarg_va_copy.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__atomic/atomic_init.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/sort_heap.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__fwd/istream.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/inplace_merge.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/is_standard_layout.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/pointer_traits.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/cwctype:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__ranges/view_interface.h:
-
-src/cube_tex.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/is_permutation.h:
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__assertion_handler:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/generate.h:
 
@@ -5187,18 +5194,6 @@ include/glm/detail/type_mat2x2.inl:
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/replace_if.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/find_segment_if.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/half_positive.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__assertion_handler:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/operations.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/pop_heap.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/allocate_at_least.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__memory/uninitialized_algorithms.h:
 
 include/glm/ext/matrix_double4x2.hpp:
 
@@ -5386,6 +5381,12 @@ include/glm/mat2x2.hpp:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__algorithm/simd_utils.h:
 
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__bit/countl.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__bit/bit_log2.h:
+
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__string/extern_template_lists.h:
+
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__utility/is_pointer_in_range.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__fwd/string.h:
@@ -5451,10 +5452,6 @@ include/glm/detail/type_vec3.inl:
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__iterator/static_bounded_iter.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__numeric/inner_product.h:
-
-include/glm/ext/quaternion_transform.inl:
-
-/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__iterator/incrementable_traits.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__atomic/support/c11.h:
 
@@ -5920,6 +5917,8 @@ include/glm/detail/type_mat4x4.hpp:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/is_member_pointer.h:
 
+/home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/remove_const_ref.h:
+
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__random/linear_congruential_engine.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/disjunction.h:
@@ -6019,8 +6018,6 @@ include/glm/ext/matrix_double2x3.hpp:
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/is_referenceable.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/wctype.h:
-
-/home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h:
 
 /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__type_traits/is_same.h:
 

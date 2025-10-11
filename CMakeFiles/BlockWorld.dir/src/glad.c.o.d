@@ -34,5 +34,4 @@ CMakeFiles/BlockWorld.dir/src/glad.c.o: \
   /home/sameer/.emscripten_cache/sysroot/include/string.h \
   /home/sameer/.emscripten_cache/sysroot/include/strings.h \
   /home/sameer/Documents/BlockWorld/BlockWorld/include/glad/glad.h \
-  /home/sameer/.emscripten_cache/sysroot/include/KHR/khrplatform.h \
-  /home/sameer/.emscripten_cache/sysroot/include/dlfcn.h
+  /home/sameer/Documents/BlockWorld/BlockWorld/include/KHR/khrplatform.h

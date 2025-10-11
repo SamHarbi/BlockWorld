@@ -5,9 +5,9 @@
 // Sameer Al Harbi 2022
 
 // These are the vertex ins
-in vec3 position;
-in vec3 normal;
-in vec2 texcoord;
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 texcoord;
 
 // Uniform variables are passed in from the application
 uniform mat4 model, view, projection, light_view;

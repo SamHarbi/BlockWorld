@@ -198,21 +198,24 @@ void Cube::drawCube(int drawmode)
 	// It would be better to make all objects have counter-clockwise winding
 	glFrontFace(GL_CW);
 
-	// Enable this line to show model in wireframe
-	if (drawmode == 1)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	if (drawmode == 2)
-	{
-		// Draw the vertices as GL_POINTS
-		glPointSize(20.f);  // Set the point size when drawing vertices
-		glDrawArrays(GL_POINTS, 0, 36);
-	}
-	else
-	{
-		// Draw the cube in triangles
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
+	// This doesn't work on WebGL, Need to consider alternatives
+	// // Enable this line to show model in wireframe
+	// if (drawmode == 1)
+	// 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	// else
+	// 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	// if (drawmode == 2)
+	// {
+	// 	// Draw the vertices as GL_POINTS
+	// 	glPointSize(20.f);  // Set the point size when drawing vertices
+	// 	glDrawArrays(GL_POINTS, 0, 36);
+	// }
+	// else
+	// {
+	// 	// Draw the cube in triangles
+	// 	glDrawArrays(GL_TRIANGLES, 0, 36);
+	// }
 }

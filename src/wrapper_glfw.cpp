@@ -65,7 +65,7 @@ GLWrapper::GLWrapper(int width, int height, const char *title) {
 	/* Initialise GLLoad library. You must have obtained a current OpenGL */
 	 // glad: load all OpenGL function pointers
 	// ---------------------------------------
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD - exiting" << std::endl;
 		glfwTerminate();
@@ -84,7 +84,7 @@ GLWrapper::GLWrapper(int width, int height, const char *title) {
 	if (glfwRawMouseMotionSupported())
 		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
-	glEnable(GL_MULTISAMPLE);
+	//glEnable(GL_MULTISAMPLE);
 }
 
 
@@ -124,6 +124,7 @@ and then starts the event loop which runs until the program ends
 */
 int GLWrapper::eventLoop()
 {
+	cout << "render loop starting..." << endl;
 	// Main loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -135,6 +136,7 @@ int GLWrapper::eventLoop()
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		
 	}
 
 	glfwTerminate();

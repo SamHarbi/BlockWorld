@@ -536,7 +536,9 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 			model.top() = translate(model.top(), vec3(x, y, z));
 			glUniformMatrix4fv(modelID[0], 1, GL_FALSE, &(model.top()[0][0]));
 
+			cout << "Drawing Chunk 0" << endl;
 			chunkblock.buildInstanceData(megaChunk[i], heightmod); //Build a Chunk at position set out in megachunk
+			cout << "Drawing Chunk 1" << endl;
 			chunkblock.drawChunkBlock(drawmode); //Draw that chunk
 
 			display_Trees(view, lightview, projection, tree1, tree2); //Render tree's for that chunk
@@ -570,14 +572,20 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 		up
 	);
 
+	cout << "skybox 0" << endl;
+
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1i(colourmodeID[1], colourmode);
+	glUniform1ui(colourmodeID[1], colourmode);
 	glUniformMatrix4fv(viewID[1], 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionID[1], 1, GL_FALSE, &projection[0][0]);
+
+	cout << "skybox 1" << endl;
 
 	//Bind Skybox texture
 	glBindTexture(GL_TEXTURE_CUBE_MAP, SkyTextureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	cout << "skybox bound" << endl;
 
 	model.push(model.top());
 	{
@@ -585,9 +593,13 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 		model.top() = translate(model.top(), vec3(0, 0, 0));
 		glUniformMatrix4fv(modelID[1], 1, GL_FALSE, &(model.top()[0][0]));
 
+		cout << "going to draw cube" << endl;
 		cube.drawCube(drawmode);
+		cout << "cube drawn" << endl;
 	}
 	model.pop();
+
+	cout << "skybox done" << endl;
 
 }
 
@@ -596,6 +608,7 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
    class because we registered display as a callback function */
 void display()
 {
+	cout << "callback stuff worked" << endl;
 	glfwSetTime(0);
 	
 	/* Define the background colour */
@@ -638,10 +651,15 @@ void display()
 	);
 
 	//Call display subfunctions that render each part of the scene with different shader programs and other variations
+	cout << "Camera and background setup worked" << endl;
 
 	display_SkyBox(up, camPos, camDirection, projection);
 
+	cout << "Skybox rendered" << endl;
+
 	display_Terrain(view, lightview, camPos, camDirection, projection);
+
+	cout << "Terrian rendered" << endl;
 
 	// Disable everything
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -745,7 +763,7 @@ int main(int argc, char* argv[])
 
 	cout << "[Passed 1]" << endl;
 
-	glw->eventLoop(); //
+	glw->eventLoop();
 
 	cout << "[Passed 2]" << endl;
 
