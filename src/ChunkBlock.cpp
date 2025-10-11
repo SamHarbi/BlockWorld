@@ -23,7 +23,7 @@ ChunkBlock::ChunkBlock()
 
 	attribute_v_coord = 0;
 	attribute_v_colours = 1;
-	attribute_v_normal = 2;
+	attribute_v_normal = 2;//
 	attribute_v_instance = 3;
 
 	positionBufferObject = 0;

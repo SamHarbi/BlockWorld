@@ -13,7 +13,7 @@ in vec3 offset;
 
 // Uniform variables are passed in from the application
 uniform mat4 model, view, projection, light_view;
-uniform uint colourmode;
+uniform int colourmode;
 
 // Output the vertex colour - to be rasterized into pixel fragments
 out vec4 fcolour;
@@ -30,7 +30,7 @@ void main()
 	vec4 position_h = vec4(position, 1.0);
 	float shininess = 8.0;
 	
-	if (colourmode)
+	if (colourmode == 1)
 		diffuse_colour = colour;
 	else
 		diffuse_colour = vec4(1.0, 1.0, 1.0, 1.0);
@@ -53,7 +53,7 @@ void main()
 	fcolour = vec4(diffuse, 1.0) + ambient + specular;
 
 	// Define the vertex position
-	gl_Position = projection * view * model * vec4(position_h.x+offset.x/2, position_h.y+offset.y/2, position_h.z+offset.z/2, 1.0);
+	gl_Position = projection * view * model * vec4(position_h.x+offset.x/2.0, position_h.y+offset.y/2.0, position_h.z+offset.z/2.0, 1.0);
 
 	// Pas through the texture coordinate
 	ftexcoord = position;
