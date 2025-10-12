@@ -7635,6 +7635,29 @@ async function createWasm() {
     };
   var _emscripten_glWaitSync = _glWaitSync;
 
+  var wasmTableMirror = [];
+  
+  /** @type {WebAssembly.Table} */
+  var wasmTable;
+  var getWasmTableEntry = (funcPtr) => {
+      var func = wasmTableMirror[funcPtr];
+      if (!func) {
+        /** @suppress {checkTypes} */
+        wasmTableMirror[funcPtr] = func = wasmTable.get(funcPtr);
+      }
+      /** @suppress {checkTypes} */
+      assert(wasmTable.get(funcPtr) == func, 'JavaScript-side Wasm function table mirror is out of date!');
+      return func;
+    };
+  var _emscripten_request_animation_frame_loop = (cb, userData) => {
+      function tick(timeStamp) {
+        if (getWasmTableEntry(cb)(timeStamp, userData)) {
+          requestAnimationFrame(tick);
+        }
+      }
+      return requestAnimationFrame(tick);
+    };
+
   var abortOnCannotGrowMemory = (requestedSize) => {
       abort(`Cannot enlarge memory arrays to size ${requestedSize} bytes (OOM). Either (1) compile with -sINITIAL_MEMORY=X with X higher than the current value ${HEAP8.length}, (2) compile with -sALLOW_MEMORY_GROWTH which allows increasing the size at runtime, or (3) if you want malloc to return NULL (0) instead of this abort, compile with -sABORTING_MALLOC=0`);
     };
@@ -8699,20 +8722,6 @@ async function createWasm() {
   
   
   
-  var wasmTableMirror = [];
-  
-  /** @type {WebAssembly.Table} */
-  var wasmTable;
-  var getWasmTableEntry = (funcPtr) => {
-      var func = wasmTableMirror[funcPtr];
-      if (!func) {
-        /** @suppress {checkTypes} */
-        wasmTableMirror[funcPtr] = func = wasmTable.get(funcPtr);
-      }
-      /** @suppress {checkTypes} */
-      assert(wasmTable.get(funcPtr) == func, 'JavaScript-side Wasm function table mirror is out of date!');
-      return func;
-    };
   var GLFW = {
   WindowFromId:(id) => {
         if (id <= 0 || !GLFW.windows) return null;
@@ -9783,10 +9792,6 @@ async function createWasm() {
   };
   var _glfwCreateWindow = (width, height, title, monitor, share) => GLFW.createWindow(width, height, title, monitor, share);
 
-  var _glfwGetTime = () => GLFW.getTime() - GLFW.initialTime;
-
-  var _glfwGetWindowSize = (winid, width, height) => GLFW.getWindowSize(winid, width, height);
-
   var _glfwInit = () => {
       if (GLFW.windows) return 1; // GL_TRUE
   
@@ -9845,8 +9850,6 @@ async function createWasm() {
 
   var _glfwRawMouseMotionSupported = () => 0;
 
-  var _glfwSetCursorPos = (winid, x, y) => GLFW.setCursorPos(winid, x, y);
-
   var _glfwSetCursorPosCallback = (winid, cbfun) => GLFW.setCursorPosCallback(winid, cbfun);
 
   var _glfwSetFramebufferSizeCallback = (winid, cbfun) => {
@@ -9862,16 +9865,6 @@ async function createWasm() {
     };
 
   var _glfwSetKeyCallback = (winid, cbfun) => GLFW.setKeyCallback(winid, cbfun);
-
-  var _glfwSetTime = (time) => {
-      GLFW.initialTime = GLFW.getTime() - time;
-    };
-
-  var _glfwSetWindowShouldClose = (winid, value) => {
-      var win = GLFW.WindowFromId(winid);
-      if (!win) return;
-      win.shouldClose = value;
-    };
 
   var _glfwSwapBuffers = (winid) => GLFW.swapBuffers(winid);
 
@@ -9907,12 +9900,6 @@ async function createWasm() {
 
   var _glfwWindowHint = (target, hint) => {
       GLFW.hints[target] = hint;
-    };
-
-  var _glfwWindowShouldClose = (winid) => {
-      var win = GLFW.WindowFromId(winid);
-      if (!win) return 0;
-      return win.shouldClose;
     };
 
 
@@ -11035,6 +11022,8 @@ var wasmImports = {
   /** @export */
   emscripten_glWaitSync: _emscripten_glWaitSync,
   /** @export */
+  emscripten_request_animation_frame_loop: _emscripten_request_animation_frame_loop,
+  /** @export */
   emscripten_resize_heap: _emscripten_resize_heap,
   /** @export */
   environ_get: _environ_get,
@@ -11053,10 +11042,6 @@ var wasmImports = {
   /** @export */
   glfwCreateWindow: _glfwCreateWindow,
   /** @export */
-  glfwGetTime: _glfwGetTime,
-  /** @export */
-  glfwGetWindowSize: _glfwGetWindowSize,
-  /** @export */
   glfwInit: _glfwInit,
   /** @export */
   glfwMakeContextCurrent: _glfwMakeContextCurrent,
@@ -11064,8 +11049,6 @@ var wasmImports = {
   glfwPollEvents: _glfwPollEvents,
   /** @export */
   glfwRawMouseMotionSupported: _glfwRawMouseMotionSupported,
-  /** @export */
-  glfwSetCursorPos: _glfwSetCursorPos,
   /** @export */
   glfwSetCursorPosCallback: _glfwSetCursorPosCallback,
   /** @export */
@@ -11075,17 +11058,11 @@ var wasmImports = {
   /** @export */
   glfwSetKeyCallback: _glfwSetKeyCallback,
   /** @export */
-  glfwSetTime: _glfwSetTime,
-  /** @export */
-  glfwSetWindowShouldClose: _glfwSetWindowShouldClose,
-  /** @export */
   glfwSwapBuffers: _glfwSwapBuffers,
   /** @export */
   glfwTerminate: _glfwTerminate,
   /** @export */
-  glfwWindowHint: _glfwWindowHint,
-  /** @export */
-  glfwWindowShouldClose: _glfwWindowShouldClose
+  glfwWindowHint: _glfwWindowHint
 };
 var wasmExports;
 createWasm();

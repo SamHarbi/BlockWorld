@@ -18,12 +18,10 @@ private:
 	int height;
 	const char *title;
 	double fps;
-	void(*renderer)();
 	bool running;
-	GLFWwindow* window;
 
 public:
-	GLWrapper(int width, int height, const char *title);
+	GLWrapper(int width, int height, const char *title, void* rawbw);
 	~GLWrapper();
 
 	void setFPS(double fps) {
@@ -33,7 +31,7 @@ public:
 	void DisplayVersion();
 
 	/* Callback registering functions */
-	void setRenderer(void(*f)());
+	void setRenderer(void(*f)(void* bw));
 	void setReshapeCallback(void(*f)(GLFWwindow* window, int w, int h));
 	void setKeyCallback(void(*f)(GLFWwindow* window, int key, int scancode, int action, int mods));
 	void setErrorCallback(void(*f)(int error, const char* description));
@@ -47,6 +45,12 @@ public:
 
 	int eventLoop();
 	GLFWwindow* getWindow();
+
+	GLFWwindow* window;
+	void(*renderer)(void* bw);
+
+	void* bw;
+
 };
 
 

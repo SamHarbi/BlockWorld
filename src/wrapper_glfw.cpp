@@ -17,6 +17,10 @@
 #include <fstream>
 #include <vector>
 
+// For web
+#include <emscripten.h>
+#include <emscripten/html5.h>
+
 using namespace std;
 
 static void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
@@ -24,7 +28,7 @@ static void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
 }
 
 /* Constructor for wrapper object */
-GLWrapper::GLWrapper(int width, int height, const char *title) {
+GLWrapper::GLWrapper(int width, int height, const char *title, void* rawbw) {
 
 	this->width = width;
 	this->height = height;
@@ -32,6 +36,7 @@ GLWrapper::GLWrapper(int width, int height, const char *title) {
 	this->fps = 60;
 	this->running = true;
 	this->renderer = NULL;
+	this->bw = rawbw;
 
 	/* Initialise GLFW and exit if it fails */
 	if (!glfwInit()) 
@@ -117,6 +122,23 @@ void GLWrapper::DisplayVersion()
 	cout << "Renderer:" << glGetString(GL_RENDERER) << endl;
 }
 
+static bool test() {
+	cout << "render loop test" << endl;
+	return true;
+}
+
+static bool webLoop(double time, void* userData) {
+		GLWrapper *glw = static_cast<GLWrapper*>(userData);
+		glw->renderer(glw->bw);
+		//test();
+
+		cout << "render loop" << endl;
+
+		// Swap buffers
+		glfwSwapBuffers(glw->window);
+		glfwPollEvents();
+		return true;
+}
 
 /*
 GLFW_Main function normally starts the windows system, calls any init routines
@@ -125,24 +147,9 @@ and then starts the event loop which runs until the program ends
 int GLWrapper::eventLoop()
 {
 	cout << "render loop starting..." << endl;
-	// Main loop
-	while (!glfwWindowShouldClose(window))
-	{
-		// Call function to draw your graphics
-		renderer();
-
-		cout << "render loop" << endl;
-
-		// Swap buffers
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-		
-	}
-
-	glfwTerminate();
+	emscripten_request_animation_frame_loop(webLoop, this);
 	return 0;
 }
-
 
 /* Register an error callback function */
 void GLWrapper::setErrorCallback(void(*func)(int error, const char* description))
@@ -151,7 +158,7 @@ void GLWrapper::setErrorCallback(void(*func)(int error, const char* description)
 }
 
 /* Register a display function that renders in the window */
-void GLWrapper::setRenderer(void(*func)()) {
+void GLWrapper::setRenderer(void(*func)(void* bw)) {
 	this->renderer = func;
 }
 

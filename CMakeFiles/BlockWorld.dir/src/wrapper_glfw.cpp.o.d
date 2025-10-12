@@ -667,4 +667,20 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o: \
   /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/directory_options.h \
   /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/path_iterator.h \
   /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/recursive_directory_iterator.h \
-  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/u8path.h
+  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/__filesystem/u8path.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/emscripten.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_asm.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_macros.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_types.h \
+  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stdbool.h \
+  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stdbool.h \
+  /home/sameer/.emscripten_cache/sysroot/include/stdbool.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_js.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/promise.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/wget.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/version.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/html5.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/eventloop.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/console.h \
+  /home/sameer/.emscripten_cache/sysroot/include/emscripten/html5_webgl.h

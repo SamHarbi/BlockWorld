@@ -966,6 +966,7 @@ CMakeFiles/BlockWorld.dir/src/BlockWorld.cpp.o
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/vec4.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/glm/vector_relational.hpp
  /home/sameer/Documents/BlockWorld/BlockWorld/include/stb_image.h
+ /home/sameer/Documents/BlockWorld/BlockWorld/src/BlockWorld.h
  /home/sameer/Documents/BlockWorld/BlockWorld/src/ChunkBlock.h
  /home/sameer/Documents/BlockWorld/BlockWorld/src/wrapper_glfw.h
  /home/sameer/Documents/BlockWorld/BlockWorld/src/ModelLoader/tiny_loader_texture.h
@@ -4165,6 +4166,7 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/queue
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/ratio
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stack
+ /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stdbool.h
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stddef.h
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stdexcept
  /home/sameer/.emscripten_cache/sysroot/include/c++/v1/stdio.h
@@ -4191,6 +4193,19 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/compat/time.h
  /home/sameer/.emscripten_cache/sysroot/include/compat/xlocale.h
  /home/sameer/.emscripten_cache/sysroot/include/ctype.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/console.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_asm.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_js.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_macros.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/em_types.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/emscripten.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/eventloop.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/html5.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/html5_webgl.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/promise.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/version.h
+ /home/sameer/.emscripten_cache/sysroot/include/emscripten/wget.h
  /home/sameer/.emscripten_cache/sysroot/include/errno.h
  /home/sameer/.emscripten_cache/sysroot/include/features.h
  /home/sameer/.emscripten_cache/sysroot/include/limits.h
@@ -4199,6 +4214,7 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /home/sameer/.emscripten_cache/sysroot/include/pthread.h
  /home/sameer/.emscripten_cache/sysroot/include/sched.h
  /home/sameer/.emscripten_cache/sysroot/include/stdarg.h
+ /home/sameer/.emscripten_cache/sysroot/include/stdbool.h
  /home/sameer/.emscripten_cache/sysroot/include/stddef.h
  /home/sameer/.emscripten_cache/sysroot/include/stdint.h
  /home/sameer/.emscripten_cache/sysroot/include/stdio.h
@@ -4229,6 +4245,7 @@ CMakeFiles/BlockWorld.dir/src/wrapper_glfw.cpp.o
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/__stddef_wchar_t.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/limits.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stdarg.h
+ /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stdbool.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stddef.h
  /nix/store/qm01ghqzgr13llirpcsxz0908pvgiv5h-emscripten-llvm-4.0.10/lib/clang/20/include/stdint.h
 

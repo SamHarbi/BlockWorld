@@ -38,66 +38,20 @@ if you prefer */
 //Perlin Noise for random gen - MIT Licensed Library on github : https://github.com/Reputeless/PerlinNoise
 # include "PerlinNoise.hpp"
 
-/* Include Objects to build our scene */
-#include "ChunkBlock.h"
-
 /* Stack Data Structure */
 #include <stack>
-
-const int numOfPrograms = 3; //How many programs will be used
-GLuint program[numOfPrograms];		/* Identifiers for the shader prgorams */
-GLuint vao;			/* Vertex array (Containor) object. This is the index of the VAO that will be the container for
-					   our buffer objects */
-
-int colourmode;
-
-					  /* Position and view globals */
-GLfloat angle_x, angle_inc_x, x, scaler, z, y;
-GLfloat angle_y, angle_inc_y, angle_z, angle_inc_z;
-
-//Camera Controls
-double horizontalCam; 
-double verticalCam;
-GLfloat cam_x;
-GLfloat cam_y;
-GLfloat cam_z;
-
-//Perlin Settings controllable by user 
-int heightmod; //height of terrain 
-
-//Camera Position Incrementals 
-GLfloat cam_x_mod;
-GLfloat cam_y_mod;
-GLfloat cam_z_mod;
-
-/* Uniforms*/
-GLuint modelID[numOfPrograms], viewID[numOfPrograms], projectionID[numOfPrograms];
-int colourmodeID[numOfPrograms];
-GLuint lightviewID[2];
-GLuint drawmode;			// Defines drawing mode as points, lines or filled polygons
-GLfloat aspect_ratio;		/* Aspect ratio of the window defined in the reshape callback*/
-GLuint normalMatrixID;
-
-//Texture IDs
-GLuint AtlasID, GrassTextureID, SkyTextureID;
-
-//Tree Models to render and skybox cube
-TinyObjLoader tree1, tree2;
-Cube cube(true);
-
-ChunkBlock chunkblock; //Single 16x16x16 Chunk Block
-glm::vec3 megaChunk[9]; //Positions of all visible Chunks around a player
-glm::vec3 chunkOrigin; //Origin Point of first chunk where player starts
-
-// Define the normal matrix used by Trees lightning
-glm::mat3 normalmatrix;
 
 using namespace std;
 using namespace glm;
 
-//Define methods for compiler 
+#include "BlockWorld.h"
+
 bool load_texture(char* filename, GLuint& texID, bool bGenMipmaps);
 bool loadCubeMap(GLuint& texID, vector<std::string> faces);
+
+BlockWorld::BlockWorld() {
+	cube = Cube(true);
+}
 
 //Menu of Controls
 void Menu()
@@ -212,7 +166,7 @@ bool load_texture(const char* filename, GLuint& texID, bool bGenMipmaps)
 }
 
 //Generate positions at which chunks need to be drawn 
-void generateMegaChunk(bool origin, glm::vec3 direction)
+static void generateMegaChunk(bool origin, glm::vec3 direction, ChunkBlock chunkblock, glm::vec3 chunkOrigin, BlockWorld *bw)
 {
 	/*
 		Mega Chunk Structure
@@ -233,7 +187,7 @@ void generateMegaChunk(bool origin, glm::vec3 direction)
 	
 	if (origin == true)
 	{
-		ip = glm::vec3(cam_x - chunkSize / 2, -20, cam_z - chunkSize / 2); //Calculate where the new middle chunk should be based on cam positon
+		ip = glm::vec3(bw->cam_x - chunkSize / 2, -20, bw->cam_z - chunkSize / 2); //Calculate where the new middle chunk should be based on cam positon
 		chunkOrigin = glm::vec3(ip.x, ip.y, ip.z);
 	}
 	else
@@ -243,61 +197,61 @@ void generateMegaChunk(bool origin, glm::vec3 direction)
 	}
 		
 	//Define actual positions of chunks 
-	megaChunk[0] = glm::vec3(ip.x + chunkSize, ip.y, ip.z + chunkSize); //1
-	megaChunk[1] = vec3(ip.x, ip.y, ip.z + chunkSize); //2
-	megaChunk[2] = vec3(ip.x - chunkSize, ip.y, ip.z + chunkSize); //3
+	bw->megaChunk[0] = glm::vec3(ip.x + chunkSize, ip.y, ip.z + chunkSize); //1
+	bw->megaChunk[1] = vec3(ip.x, ip.y, ip.z + chunkSize); //2
+	bw->megaChunk[2] = vec3(ip.x - chunkSize, ip.y, ip.z + chunkSize); //3
 
-	megaChunk[3] = vec3(ip.x + chunkSize, ip.y, ip.z); //4
-	megaChunk[4] = vec3(ip.x, ip.y, ip.z); //5
-	megaChunk[5] = vec3(ip.x - chunkSize, ip.y, ip.z); //6
+	bw->megaChunk[3] = vec3(ip.x + chunkSize, ip.y, ip.z); //4
+	bw->megaChunk[4] = vec3(ip.x, ip.y, ip.z); //5
+	bw->megaChunk[5] = vec3(ip.x - chunkSize, ip.y, ip.z); //6
 
-	megaChunk[6] = vec3(ip.x + chunkSize, ip.y, ip.z - chunkSize); //7
-	megaChunk[7] = vec3(ip.x, ip.y, ip.z - chunkSize); //8
-	megaChunk[8] = vec3(ip.x - chunkSize, ip.y, ip.z - chunkSize); //9
+	bw->megaChunk[6] = vec3(ip.x + chunkSize, ip.y, ip.z - chunkSize); //7
+	bw->megaChunk[7] = vec3(ip.x, ip.y, ip.z - chunkSize); //8
+	bw->megaChunk[8] = vec3(ip.x - chunkSize, ip.y, ip.z - chunkSize); //9
 }
 
 /*
 This function is called before entering the main rendering loop.
 Use it for all your initialisation stuff
 */
-void init(GLWrapper* glw)
+static void init(GLWrapper* glw, BlockWorld* bw)
 {
 	/* Set the object transformation controls to their initial values */
 
 	//Initial Terrain Position 
-	x = 0;
-	y = 0;
-	z = 0;
+	bw->x = 0;
+	bw->y = 0;
+	bw->z = 0;
 
-	angle_x = angle_y = angle_z = 0;
-	angle_inc_x = angle_inc_y = angle_inc_z = 0;
-	scaler = 1.f;
-	aspect_ratio = 1.3333f;
-	colourmode = 0;
+	bw->angle_x = bw->angle_y = bw->angle_z = 0;
+	bw->angle_inc_x = bw->angle_inc_y = bw->angle_inc_z = 0;
+	bw->scaler = 1.f;
+	bw->aspect_ratio = 1.3333f;
+	bw->colourmode = 0;
 
-	horizontalCam = 0.0f;
-	verticalCam = 0.0f;
+	bw->horizontalCam = 0.0f;
+	bw->verticalCam = 0.0f;
 
 	//Initial Camera Positon
-	cam_x = 13;
-	cam_y = 0;
-	cam_z = 13;
+	bw->cam_x = 13;
+	bw->cam_y = 0;
+	bw->cam_z = 13;
 
-	heightmod = 10;
+	bw->heightmod = 10;
 
 	cout << "About to gen vertex arrays" << endl;
 
 	// Generate index (name) for one vertex array object
-	glGenVertexArrays(1, &vao);
+	glGenVertexArrays(1, &(bw->vao));
 
 	// Create the vertex array object and make it current
-	glBindVertexArray(vao);
+	glBindVertexArray(bw->vao);
 
 	cout << "About to make cubes" << endl; //
 
 	/* Create a Chunk Block and Skybox Cube */
-	cube.makeCube(); //
-	chunkblock.makeChunkBlock();
+	bw->cube.makeCube(); //
+	bw->chunkblock.makeChunkBlock();
 
 	cout << "loading models.." << endl;
 
@@ -306,20 +260,20 @@ void init(GLWrapper* glw)
 		These Models have been purchased as part of the POLYGON - Adventure Pack from the Synty Store
 		The Pack: https://syntystore.com/products/polygon-adventure-pack?_pos=1&_sid=19b8ccc9f&_ss=r
 	*/
-	tree1.load_obj("Models/SM_Env_TreePine_03.obj");
-	tree2.load_obj("Models/SM_Env_Tree_01.obj");
+	bw->tree1.load_obj("Models/SM_Env_TreePine_03.obj");
+	bw->tree2.load_obj("Models/SM_Env_Tree_01.obj");
 
 	cout << "models loaded" << endl; //
 
 	//Create initial terrain megachunk positions using inital position
-	generateMegaChunk(true, chunkOrigin);
+	generateMegaChunk(true, bw->chunkOrigin, bw->chunkblock, bw->chunkOrigin, bw);
 
 	// This is the location of the texture object (TEXTURE0), i.e. tex1 will be the name
 	// of the sampler in the fragment shader
 	int loc;
 
 	//For each program in numOfPrograms
-	for (int i = 0; i < numOfPrograms; i++)
+	for (int i = 0; i < bw->numOfPrograms; i++)
 	{
 		try
 		{
@@ -330,7 +284,7 @@ void init(GLWrapper* glw)
 			*/
 			string path_v = "Shaders/program_v_" + to_string(i) + ".vert";
 			string path_f = "Shaders/program_f_" + to_string(i) + ".frag";
-			program[i] = glw->LoadShader(&path_v[0], &path_f[0]);
+			bw->program[i] = glw->LoadShader(&path_v[0], &path_f[0]);
 			cout << "done loading shaders.." << endl;
 		}
 		catch (exception& e)
@@ -341,21 +295,21 @@ void init(GLWrapper* glw)
 		}//
 
 		/* Define uniforms to send to vertex shader */
-		modelID[i] = glGetUniformLocation(program[i], "model");
-		colourmodeID[i] = glGetUniformLocation(program[i], "colourmode");
-		viewID[i] = glGetUniformLocation(program[i], "view");
-		projectionID[i] = glGetUniformLocation(program[i], "projection");
+		bw->modelID[i] = glGetUniformLocation(bw->program[i], "model");
+		bw->colourmodeID[i] = glGetUniformLocation(bw->program[i], "colourmode");
+		bw->viewID[i] = glGetUniformLocation(bw->program[i], "view");
+		bw->projectionID[i] = glGetUniformLocation(bw->program[i], "projection");
 
-		loc = glGetUniformLocation(program[i], "tex1");
+		loc = glGetUniformLocation(bw->program[i], "tex1");
 		if (loc >= 0) glUniform1i(loc, 0);
 	}
 
 	//Uniform that's only for shader program 0 & 2 - Terrain & Trees
-	lightviewID[0] = glGetUniformLocation(program[0], "light_view");
-	lightviewID[1] = glGetUniformLocation(program[2], "light_view");
+	bw->lightviewID[0] = glGetUniformLocation(bw->program[0], "light_view");
+	bw->lightviewID[1] = glGetUniformLocation(bw->program[2], "light_view");
 
 	//Uniform that's only for shader program 2 - Trees
-	normalMatrixID = glGetUniformLocation(program[2], "normalmatrix");
+	bw->normalMatrixID = glGetUniformLocation(bw->program[2], "normalmatrix");
 
 	//Define texture images that make a terrain block cubemap texture
 	/*
@@ -385,13 +339,13 @@ void init(GLWrapper* glw)
 			"Skybox/bluecloud_lf.jpg"
 	};
 
-	if (!loadCubeMap(GrassTextureID, faces))
+	if (!loadCubeMap(bw->GrassTextureID, faces))
 	{
 		cout << "Fatal error loading Grass Cubemap" << endl;
 		exit(0);
 	}
 
-	if (!loadCubeMap(SkyTextureID, faces_back))
+	if (!loadCubeMap(bw->SkyTextureID, faces_back))
 	{
 		cout << "Fatal error loading Grass Cubemap" << endl;
 		exit(0);
@@ -402,7 +356,7 @@ void init(GLWrapper* glw)
 	//Load in Atlas Texture for models - Was distributed with models (See above)
 	const char* atlasfilename = "PolyAdventureTexture_01.png";
 
-	if (!load_texture(atlasfilename, AtlasID, true))
+	if (!load_texture(atlasfilename, bw->AtlasID, true))
 	{
 		cout << "Fatal error loading Atlas Texture" << endl;
 		exit(0);
@@ -415,9 +369,9 @@ void init(GLWrapper* glw)
 /*
 	Display subfunction that handles rendering trees (program 2)
 */
-void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoader tree, TinyObjLoader alt_tree)
+static void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoader tree, TinyObjLoader alt_tree, BlockWorld *bw)
 {
-	glUseProgram(program[2]);
+	glUseProgram(bw->program[2]);
 
 	/* Enable depth test  */
 	glEnable(GL_DEPTH_TEST);
@@ -433,39 +387,39 @@ void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoader tre
 	model.push(mat4(1.0f));
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1i(colourmodeID[2], colourmode);
-	glUniformMatrix4fv(viewID[2], 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(projectionID[2], 1, GL_FALSE, &projection[0][0]);
-	glUniformMatrix4fv(lightviewID[1], 1, GL_FALSE, &lightview[0][0]);
+	glUniform1i(bw->colourmodeID[2], bw->colourmode);
+	glUniformMatrix4fv(bw->viewID[2], 1, GL_FALSE, &(view[0][0]));
+	glUniformMatrix4fv(bw->projectionID[2], 1, GL_FALSE, &(projection)[0][0]);
+	glUniformMatrix4fv(bw->lightviewID[1], 1, GL_FALSE, &(lightview[0][0]));
 
 	//Bind Texture
-	glBindTexture(GL_TEXTURE_2D, AtlasID);
+	glBindTexture(GL_TEXTURE_2D, bw->AtlasID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 	//Render 5 Trees 
 	for (int i = 1; i < 5; i++)
 	{
 		//Get Position of a top block of previously rendered chunk
-		vec3 pos = chunkblock.getTranslations((14 + 15 * 16) * (i * 2));
+		vec3 pos = bw->chunkblock.getTranslations((14 + 15 * 16) * (i * 2));
 
 		model.push(model.top());
 		{
 			model.top() = translate(model.top(), vec3(pos.x, pos.y, pos.z));
 			model.top() = scale(model.top(), vec3(0.01, 0.01, 0.01));
-			glUniformMatrix4fv(modelID[2], 1, GL_FALSE, &(model.top()[0][0]));
+			glUniformMatrix4fv(bw->modelID[2], 1, GL_FALSE, &(model.top()[0][0]));
 
 			// Recalculate the normal matrix and send to the vertex shader
-			normalmatrix = transpose(inverse(mat3(lightview * model.top())));
-			glUniformMatrix3fv(normalMatrixID, 1, GL_FALSE, &normalmatrix[0][0]);
+			bw->normalmatrix = transpose(inverse(mat3(lightview * model.top())));
+			glUniformMatrix3fv(bw->normalMatrixID, 1, GL_FALSE, &(bw->normalmatrix[0][0]));
 
 			//Draw one of two tree models 
 			if (i > 2)
 			{
-				alt_tree.drawObject(drawmode);
+				alt_tree.drawObject(bw->drawmode);
 			}
 			else
 			{
-				tree.drawObject(drawmode);
+				tree.drawObject(bw->drawmode);
 			}
 		}
 		model.pop();
@@ -478,7 +432,7 @@ void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoader tre
 /*
 	Display subfunction that handles rendering terrain (program 0)
 */
-void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, mat4 projection)
+void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, mat4 projection, BlockWorld *bw)
 {
 	/* Enable depth test  */
 	glEnable(GL_DEPTH_TEST);
@@ -488,7 +442,7 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	glCullFace(GL_BACK);
 
 	/* Make the compiled shader program current */
-	glUseProgram(program[0]);
+	glUseProgram(bw->program[0]);
 
 	// Define our model transformation in a stack and 
 	// push the identity matrix onto the stack
@@ -496,36 +450,36 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	model.push(mat4(1.0f));
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1i(colourmodeID[0], colourmode);
-	glUniformMatrix4fv(viewID[0], 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(projectionID[0], 1, GL_FALSE, &projection[0][0]);
-	glUniformMatrix4fv(lightviewID[0], 1, GL_FALSE, &lightview[0][0]);
+	glUniform1i(bw->colourmodeID[0], bw->colourmode);
+	glUniformMatrix4fv(bw->viewID[0], 1, GL_FALSE, &(view[0][0]));
+	glUniformMatrix4fv(bw->projectionID[0], 1, GL_FALSE, &(projection[0][0]));
+	glUniformMatrix4fv(bw->lightviewID[0], 1, GL_FALSE, &(lightview[0][0]));
 
 	model.top() = scale(model.top(), vec3(2.0f, 2.0f, 2.0f));//scale equally in all axis
 
 	//Check if camera position is approaching megachunks bounds, if so- then regenerate for the new camera position
 	//X Bounds
-	if (cam_x > 32 + megaChunk[5].x)
+	if (bw->cam_x > 32 + bw->megaChunk[5].x)
 	{
-		generateMegaChunk(false, glm::vec3(16, 0, 0));
+		generateMegaChunk(false, glm::vec3(16, 0, 0), bw->chunkblock, bw->chunkOrigin, bw);
 	}
-	else if (cam_x < megaChunk[5].x + 16)
+	else if (bw->cam_x < bw->megaChunk[5].x + 16)
 	{
 		glm::vec3 dir = glm::vec3(-16, 0, 0);
-		generateMegaChunk(false, dir);
+		generateMegaChunk(false, dir, bw->chunkblock, bw->chunkOrigin, bw);
 	}
 	//Z Bounds
-	if (cam_z > 16 + megaChunk[5].z)
+	if (bw->cam_z > 16 + bw->megaChunk[5].z)
 	{
-		generateMegaChunk(false, glm::vec3(0, 0, 16));
+		generateMegaChunk(false, glm::vec3(0, 0, 16), bw->chunkblock, bw->chunkOrigin, bw);
 	}
-	else if (cam_z < megaChunk[5].z)
+	else if (bw->cam_z < bw->megaChunk[5].z)
 	{
-		generateMegaChunk(false, glm::vec3(0, 0, -16));
+		generateMegaChunk(false, glm::vec3(0, 0, -16), bw->chunkblock, bw->chunkOrigin, bw);
 	}
 
 	//Bind Grass Block texture
-	glBindTexture(GL_TEXTURE_CUBE_MAP, GrassTextureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, bw->GrassTextureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 	//9 as in 9 locations defined in megachunk 
@@ -533,17 +487,17 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	{
 		model.push(model.top());
 		{
-			model.top() = translate(model.top(), vec3(x, y, z));
-			glUniformMatrix4fv(modelID[0], 1, GL_FALSE, &(model.top()[0][0]));
+			model.top() = translate(model.top(), vec3(bw->x, bw->y, bw->z));
+			glUniformMatrix4fv(bw->modelID[0], 1, GL_FALSE, &(model.top()[0][0]));
 
 			cout << "Drawing Chunk 0" << endl;
-			chunkblock.buildInstanceData(megaChunk[i], heightmod); //Build a Chunk at position set out in megachunk
+			bw->chunkblock.buildInstanceData(bw->megaChunk[i], bw->heightmod); //Build a Chunk at position set out in megachunk
 			cout << "Drawing Chunk 1" << endl;
-			chunkblock.drawChunkBlock(drawmode); //Draw that chunk
+			bw->chunkblock.drawChunkBlock(bw->drawmode); //Draw that chunk
 
-			display_Trees(view, lightview, projection, tree1, tree2); //Render tree's for that chunk
+			display_Trees(view, lightview, projection, bw->tree1, bw->tree2, bw); //Render tree's for that chunk
 
-			glUseProgram(program[0]); //After tree rendering is done, prepare to render next chunk
+			glUseProgram(bw->program[0]); //After tree rendering is done, prepare to render next chunk
 		}
 		model.pop();
 	}
@@ -552,10 +506,10 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 /*
 	Display subfunction that handles rendering the skybox (program 1)
 */
-void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
+void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection, BlockWorld* bw)
 {
 	/* Make the compiled shader program current */
-	glUseProgram(program[1]);
+	glUseProgram(bw->program[1]);
 
 	// Define our model transformation in a stack and 
 	// push the identity matrix onto the stack
@@ -575,14 +529,14 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 	cout << "skybox 0" << endl;
 
 	// Send our uniforms variables to the currently bound shader,
-	glUniform1ui(colourmodeID[1], colourmode);
-	glUniformMatrix4fv(viewID[1], 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(projectionID[1], 1, GL_FALSE, &projection[0][0]);
+	glUniform1ui(bw->colourmodeID[1], bw->colourmode);
+	glUniformMatrix4fv(bw->viewID[1], 1, GL_FALSE, &(view[0][0]));
+	glUniformMatrix4fv(bw->projectionID[1], 1, GL_FALSE, &(projection[0][0]));
 
 	cout << "skybox 1" << endl;
 
 	//Bind Skybox texture
-	glBindTexture(GL_TEXTURE_CUBE_MAP, SkyTextureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, bw->SkyTextureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 	cout << "skybox bound" << endl;
@@ -591,10 +545,10 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 	{
 		model.top() = scale(model.top(), vec3(200, 200, 200));
 		model.top() = translate(model.top(), vec3(0, 0, 0));
-		glUniformMatrix4fv(modelID[1], 1, GL_FALSE, &(model.top()[0][0]));
+		glUniformMatrix4fv(bw->modelID[1], 1, GL_FALSE, &(model.top()[0][0]));
 
 		cout << "going to draw cube" << endl;
-		cube.drawCube(drawmode);
+		bw->cube.drawCube(bw->drawmode);
 		cout << "cube drawn" << endl;
 	}
 	model.pop();
@@ -606,10 +560,11 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection)
 
 /* Called to update the display. Note that this function is called in the event loop in the wrapper
    class because we registered display as a callback function */
-void display()
+static void display(void* rawbw)
 {
+	BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
 	cout << "callback stuff worked" << endl;
-	glfwSetTime(0);
+	//glfwSetTime(0);
 	
 	/* Define the background colour */
 	glClearColor(102.0f/255.0f, 153.0f/255.0f, 255.0f/255.0f, 1.0f);
@@ -618,19 +573,19 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Create vec3 from camera position components 
-	vec3 camPos = vec3(cam_x, cam_y, cam_z);
+	vec3 camPos = vec3(bw->cam_x, bw->cam_y, bw->cam_z);
 
 	//Camera Direction
-	vec3 camDirection = vec3(cos(verticalCam) * sin(horizontalCam), sin(verticalCam), cos(verticalCam) * cos(horizontalCam));
+	vec3 camDirection = vec3(cos(bw->verticalCam) * sin(bw->horizontalCam), sin(bw->verticalCam), cos(bw->verticalCam) * cos(bw->horizontalCam));
 
-	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	mat4 projection = perspective(radians(90.0f), aspect_ratio, 0.1f, 100.0f);
+	//Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	mat4 projection = perspective(radians(90.0f), bw->aspect_ratio, 0.1f, 100.0f);
 
 	//Used to calculate the correct Head up position
 	vec3 right = vec3(
-		sin(horizontalCam - 3.14f / 2.0f),
+		sin(bw->horizontalCam - 3.14f / 2.0f),
 		0,
-		cos(horizontalCam - 3.14f / 2.0f)
+		cos(bw->horizontalCam - 3.14f / 2.0f)
 	);
 
 	//Get which way is up 
@@ -653,11 +608,11 @@ void display()
 	//Call display subfunctions that render each part of the scene with different shader programs and other variations
 	cout << "Camera and background setup worked" << endl;
 
-	display_SkyBox(up, camPos, camDirection, projection);
+	display_SkyBox(up, camPos, camDirection, projection, bw);
 
 	cout << "Skybox rendered" << endl;
 
-	display_Terrain(view, lightview, camPos, camDirection, projection);
+	display_Terrain(view, lightview, camPos, camDirection, projection, bw);
 
 	cout << "Terrian rendered" << endl;
 
@@ -667,9 +622,9 @@ void display()
 	glUseProgram(0);
 
 	//Which way the camera is looking becomes the vector towards which the camera moves forward
-	cam_x_mod = camDirection.x;
-	cam_y_mod = camDirection.y;
-	cam_z_mod = camDirection.z;
+	bw->cam_x_mod = camDirection.x;
+	bw->cam_y_mod = camDirection.y;
+	bw->cam_z_mod = camDirection.z;
 }
 
 /*
@@ -678,70 +633,73 @@ void display()
 */
 static void mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
-	int height, width;
-	float mouseSpeed = 1.0f;
-	glfwGetWindowSize(window, &width, &height);
+	// BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
+	// int height, width;
+	// float mouseSpeed = 1.0f;
+	// glfwGetWindowSize(window, &width, &height);
 
-	double deltaTime = glfwGetTime();
-	glfwSetTime(0);
+	// double deltaTime = glfwGetTime();
+	// glfwSetTime(0);
 
-	horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
-	verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
+	// bw->horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
+	// bw->verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
 
-	glfwSetCursorPos(window, width/2, height/2);
+	// glfwSetCursorPos(window, width/2, height/2);
 	
 }
 
 /* Called whenever the window is resized. The new window size is given, in pixels. */
 static void reshape(GLFWwindow* window, int w, int h)
 {
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-	aspect_ratio = ((float)w / 640.f * 4.f) / ((float)h / 480.f * 3.f);
+	// BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
+	// glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	// bw->aspect_ratio = ((float)w / 640.f * 4.f) / ((float)h / 480.f * 3.f);
 }
 
 /* change view angle, exit upon ESC */
 static void keyCallback(GLFWwindow* window, int key, int s, int action, int mods)
 {
-	/* Enable this call if you want to disable key responses to a held down key*/
-	//if (action != GLFW_PRESS) return;
+	// BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
+	// /* Enable this call if you want to disable key responses to a held down key*/
+	// //if (action != GLFW_PRESS) return;
 
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
+	// if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	// 	glfwSetWindowShouldClose(window, GL_TRUE);
 
-	if (key == 'W') //Move forward, apply direction looked at by camera as forward vector
-	{
-		cam_x += cam_x_mod;
-		cam_z += cam_z_mod;
-		cam_y += cam_y_mod;
-	}
-	if (key == 'S') //Move Backward, same as forward but opposite
-	{
-		cam_x -= cam_x_mod;
-		cam_z -= cam_z_mod;
-		cam_y -= cam_y_mod;
-	}
+	// if (key == 'W') //Move forward, apply direction looked at by camera as forward vector
+	// {
+	// 	bw->cam_x += bw->cam_x_mod;
+	// 	bw->cam_z += bw->cam_z_mod;
+	// 	bw->cam_y += bw->cam_y_mod;
+	// }
+	// if (key == 'S') //Move Backward, same as forward but opposite
+	// {
+	// 	bw->cam_x -= bw->cam_x_mod;
+	// 	bw->cam_z -= bw->cam_z_mod;
+	// 	bw->cam_y -= bw->cam_y_mod;
+	// }
 
-	if (key == 'H' && action != GLFW_PRESS) //Increase Perlin Height modifier
-	{
-		heightmod++;
-		if (heightmod > 30)
-		{
-			heightmod = 10;
-		}
-	}
+	// if (key == 'H' && action != GLFW_PRESS) //Increase Perlin Height modifier
+	// {
+	// 	bw->heightmod++;
+	// 	if (bw->heightmod > 30)
+	// 	{
+	// 		bw->heightmod = 10;
+	// 	}
+	// }
 
-	if (key == 'M' && action != GLFW_PRESS)
-	{
-		colourmode = !colourmode;
-		cout << "colourmode=" << colourmode << endl;
-	}
+	// if (key == 'M' && action != GLFW_PRESS)
+	// {
+	// 	bw->colourmode = !bw->colourmode;
+	// 	cout << "colourmode=" << bw->colourmode << endl;
+	// }
 
-	/* Cycle between drawing vertices, mesh and filled polygons */
-	if (key == 'N' && action != GLFW_PRESS)
-	{
-		drawmode++;
-		if (drawmode > 2) drawmode = 0;
-	}
+	// /* Cycle between drawing vertices, mesh and filled polygons */
+	// if (key == 'N' && action != GLFW_PRESS)
+	// {
+	// 	bw->drawmode++;
+	// 	if (bw->drawmode > 2) bw->drawmode = 0;
+	// }
 
 }
 
@@ -749,7 +707,8 @@ static void keyCallback(GLFWwindow* window, int key, int s, int action, int mods
 int main(int argc, char* argv[])
 {
 	cout << "[Program Starting!]" << endl;
-	GLWrapper* glw = new GLWrapper(1024, 768, "BlockWorld");
+	BlockWorld* bw = new BlockWorld();
+	GLWrapper* glw = new GLWrapper(1024, 768, "BlockWorld", (void*)bw);
 	cout << "[GLFW success!]" << endl;
 
 	glw->setMouseCallback(mouseCallback);
@@ -759,7 +718,7 @@ int main(int argc, char* argv[])
 
 	cout << "[Passed 0.0]" << endl;
 
-	init(glw);
+	init(glw, bw);
 
 	cout << "[Passed 1]" << endl;
 
@@ -767,7 +726,8 @@ int main(int argc, char* argv[])
 
 	cout << "[Passed 2]" << endl;
 
-	delete(glw);
+	//delete(glw);
+	//delete(bw)
 	return 0;
 }
 
