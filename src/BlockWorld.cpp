@@ -49,6 +49,9 @@ using namespace glm;
 bool load_texture(char* filename, GLuint& texID, bool bGenMipmaps);
 bool loadCubeMap(GLuint& texID, vector<std::string> faces);
 
+double GLOBAL_horizontalCam;
+double GLOBAL_verticalCam;
+
 BlockWorld::BlockWorld() {
 	cube = Cube(true);
 }
@@ -239,21 +242,15 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 
 	bw->heightmod = 10;
 
-	cout << "About to gen vertex arrays" << endl;
-
 	// Generate index (name) for one vertex array object
 	glGenVertexArrays(1, &(bw->vao));
 
 	// Create the vertex array object and make it current
 	glBindVertexArray(bw->vao);
 
-	cout << "About to make cubes" << endl; //
-
 	/* Create a Chunk Block and Skybox Cube */
 	bw->cube.makeCube(); //
 	bw->chunkblock.makeChunkBlock();
-
-	cout << "loading models.." << endl;
 
 	//Load in and create custom imported 3D Models
 	/*
@@ -262,8 +259,6 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 	*/
 	bw->tree1.load_obj("Models/SM_Env_TreePine_03.obj");
 	bw->tree2.load_obj("Models/SM_Env_Tree_01.obj");
-
-	cout << "models loaded" << endl; //
 
 	//Create initial terrain megachunk positions using inital position
 	generateMegaChunk(true, bw->chunkOrigin, bw->chunkblock, bw->chunkOrigin, bw);
@@ -277,7 +272,6 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 	{
 		try
 		{
-			cout << "loading shaders.." << endl;
 			//Build path for shaders based on which program is being loaded
 			/*
 				program[i] -> Built from program_v_i.vert + program_f_i.frag
@@ -285,7 +279,6 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 			string path_v = "Shaders/program_v_" + to_string(i) + ".vert";
 			string path_f = "Shaders/program_f_" + to_string(i) + ".frag";
 			bw->program[i] = glw->LoadShader(&path_v[0], &path_f[0]);
-			cout << "done loading shaders.." << endl;
 		}
 		catch (exception& e)
 		{
@@ -490,9 +483,7 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 			model.top() = translate(model.top(), vec3(bw->x, bw->y, bw->z));
 			glUniformMatrix4fv(bw->modelID[0], 1, GL_FALSE, &(model.top()[0][0]));
 
-			cout << "Drawing Chunk 0" << endl;
 			bw->chunkblock.buildInstanceData(bw->megaChunk[i], bw->heightmod); //Build a Chunk at position set out in megachunk
-			cout << "Drawing Chunk 1" << endl;
 			bw->chunkblock.drawChunkBlock(bw->drawmode); //Draw that chunk
 
 			display_Trees(view, lightview, projection, bw->tree1, bw->tree2, bw); //Render tree's for that chunk
@@ -526,20 +517,14 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection, Bl
 		up
 	);
 
-	cout << "skybox 0" << endl;
-
 	// Send our uniforms variables to the currently bound shader,
 	glUniform1ui(bw->colourmodeID[1], bw->colourmode);
 	glUniformMatrix4fv(bw->viewID[1], 1, GL_FALSE, &(view[0][0]));
 	glUniformMatrix4fv(bw->projectionID[1], 1, GL_FALSE, &(projection[0][0]));
 
-	cout << "skybox 1" << endl;
-
 	//Bind Skybox texture
 	glBindTexture(GL_TEXTURE_CUBE_MAP, bw->SkyTextureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-
-	cout << "skybox bound" << endl;
 
 	model.push(model.top());
 	{
@@ -547,13 +532,10 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection, Bl
 		model.top() = translate(model.top(), vec3(0, 0, 0));
 		glUniformMatrix4fv(bw->modelID[1], 1, GL_FALSE, &(model.top()[0][0]));
 
-		cout << "going to draw cube" << endl;
 		bw->cube.drawCube(bw->drawmode);
-		cout << "cube drawn" << endl;
 	}
 	model.pop();
 
-	cout << "skybox done" << endl;
 
 }
 
@@ -563,14 +545,13 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection, Bl
 static void display(void* rawbw)
 {
 	BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
-	cout << "callback stuff worked" << endl;
 	//glfwSetTime(0);
 	
 	/* Define the background colour */
 	glClearColor(102.0f/255.0f, 153.0f/255.0f, 255.0f/255.0f, 1.0f);
 
 	/* Clear the colour and frame buffers */
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Create vec3 from camera position components 
 	vec3 camPos = vec3(bw->cam_x, bw->cam_y, bw->cam_z);
@@ -606,25 +587,25 @@ static void display(void* rawbw)
 	);
 
 	//Call display subfunctions that render each part of the scene with different shader programs and other variations
-	cout << "Camera and background setup worked" << endl;
 
 	display_SkyBox(up, camPos, camDirection, projection, bw);
 
-	cout << "Skybox rendered" << endl;
 
 	display_Terrain(view, lightview, camPos, camDirection, projection, bw);
 
-	cout << "Terrian rendered" << endl;
 
 	// Disable everything
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisableVertexAttribArray(0);
-	glUseProgram(0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//glDisableVertexAttribArray(0);
+	//glUseProgram(0); 
 
 	//Which way the camera is looking becomes the vector towards which the camera moves forward
 	bw->cam_x_mod = camDirection.x;
 	bw->cam_y_mod = camDirection.y;
 	bw->cam_z_mod = camDirection.z;
+
+	bw->horizontalCam = GLOBAL_horizontalCam;
+	bw->verticalCam = GLOBAL_verticalCam;
 }
 
 /*
@@ -633,18 +614,17 @@ static void display(void* rawbw)
 */
 static void mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
-	// BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
-	// int height, width;
-	// float mouseSpeed = 1.0f;
-	// glfwGetWindowSize(window, &width, &height);
+	int height, width;
+	float mouseSpeed = 0.01f;
+	glfwGetWindowSize(window, &width, &height);
 
-	// double deltaTime = glfwGetTime();
-	// glfwSetTime(0);
+	double deltaTime = glfwGetTime();
+	glfwSetTime(0);
 
-	// bw->horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
-	// bw->verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
+	GLOBAL_horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
+	GLOBAL_verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
 
-	// glfwSetCursorPos(window, width/2, height/2);
+	glfwSetCursorPos(window, width/2, height/2);
 	
 }
 

@@ -208,7 +208,6 @@ void ChunkBlock::buildInstanceData(glm::vec3 position, int heightmod)
 	
 	translations.clear();
 
-	printf("BID 0\n");
 
 	/*
 		   X--------X
@@ -233,50 +232,39 @@ void ChunkBlock::buildInstanceData(glm::vec3 position, int heightmod)
 		}
 	}
 
-	printf("BID 1\n");
 
 	//Bind Instance data generated 
 	glBindBuffer(GL_ARRAY_BUFFER, instanceData);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * blockCount, &translations[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	printf("BID 2\n");
 
 }
 
 void ChunkBlock::drawChunkBlock(int drawmode)
 {
-	printf("DCB0\n");
 	/* Bind cube vertices. Note that this is in attribute index 0 */
 	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
 	glEnableVertexAttribArray(attribute_v_coord);
 	glVertexAttribPointer(attribute_v_coord, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	printf("DCB1\n");
 	/* Bind cube colours. Note that this is in attribute index 1 */
 	glBindBuffer(GL_ARRAY_BUFFER, colourObject);
 	glEnableVertexAttribArray(attribute_v_colours);
 	glVertexAttribPointer(attribute_v_colours, 4, GL_FLOAT, GL_FALSE, 0, 0);
-	printf("DCB2\n");
 	/* Bind cube normals. Note that this is in attribute index 2 */
 	glEnableVertexAttribArray(attribute_v_normal);
 	glBindBuffer(GL_ARRAY_BUFFER, normalsBufferObject);
 	glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	printf("DCB3\n");
 	/* Bind Instance data */
 	glEnableVertexAttribArray(attribute_v_instance);
 	glBindBuffer(GL_ARRAY_BUFFER, instanceData);
-	printf("DCB3.1\n");
 	glVertexAttribPointer(attribute_v_instance, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	printf("DCB3.2\n");
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	printf("DCB3.3\n");
 	glVertexAttribDivisor(attribute_v_instance, 1);
-	printf("DCB4\n");
 	glFrontFace(GL_CW);
 	//glPointSize(1.f);
 	glBindVertexArray(positionBufferObject);
 
-	printf("DCB5\n");
 	
 	if (drawmode == 0)
 	{

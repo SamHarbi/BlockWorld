@@ -1,23 +1,49 @@
 {
   "nodes": {
+    "cachePatch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-rzGDzaBviwMolWTcVphgQDJhsKha8dcsrqnGfG0VJQQ=",
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/nixos-unstable/pkgs/development/compilers/emscripten/locate_cache.sh"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/nixos-unstable/pkgs/development/compilers/emscripten/locate_cache.sh"
+      }
+    },
+    "emsPatch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-BsUug7KFlztnLsjcsXxj4xouZd9//cKcGQ/MjWn90K0=",
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/nixos-unstable/pkgs/development/compilers/emscripten/0001-emulate-clang-sysroot-include-logic.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/nixos-unstable/pkgs/development/compilers/emscripten/0001-emulate-clang-sysroot-include-logic.patch"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1759994382,
-        "narHash": "sha256-wSK+3UkalDZRVHGCRikZ//CyZUJWDJkBDTQX1+G77Ow=",
+        "lastModified": 1760284886,
+        "narHash": "sha256-TK9Kr0BYBQ/1P5kAsnNQhmWWKgmZXwUQr4ZMjCzWf2c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5da4a26309e796daa7ffca72df93dbe53b8164c7",
+        "rev": "cf3f5c4def3c7b5f1fc012b3d839575dbe552d43",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-25.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
+        "cachePatch": "cachePatch",
+        "emsPatch": "emsPatch",
         "nixpkgs": "nixpkgs"
       }
     }

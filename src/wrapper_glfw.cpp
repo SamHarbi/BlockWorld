@@ -90,6 +90,8 @@ GLWrapper::GLWrapper(int width, int height, const char *title, void* rawbw) {
 		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
 	//glEnable(GL_MULTISAMPLE);
+
+	glfwSwapInterval(1);
 }
 
 
@@ -127,17 +129,15 @@ static bool test() {
 	return true;
 }
 
-static bool webLoop(double time, void* userData) {
+void webLoop(void* userData) {
 		GLWrapper *glw = static_cast<GLWrapper*>(userData);
 		glw->renderer(glw->bw);
 		//test();
 
-		cout << "render loop" << endl;
 
 		// Swap buffers
 		glfwSwapBuffers(glw->window);
 		glfwPollEvents();
-		return true;
 }
 
 /*
@@ -147,7 +147,8 @@ and then starts the event loop which runs until the program ends
 int GLWrapper::eventLoop()
 {
 	cout << "render loop starting..." << endl;
-	emscripten_request_animation_frame_loop(webLoop, this);
+	//emscripten_request_animation_frame_loop(webLoop, this);
+	emscripten_set_main_loop_arg(webLoop, this, 60, 1);
 	return 0;
 }
 
