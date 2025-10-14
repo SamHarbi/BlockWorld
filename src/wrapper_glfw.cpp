@@ -136,7 +136,7 @@ void webLoop(void* userData) {
 
 
 		// Swap buffers
-		glfwSwapBuffers(glw->window);
+		//glfwSwapBuffers(glw->window);
 		glfwPollEvents();
 }
 
@@ -148,7 +148,7 @@ int GLWrapper::eventLoop()
 {
 	cout << "render loop starting..." << endl;
 	//emscripten_request_animation_frame_loop(webLoop, this);
-	emscripten_set_main_loop_arg(webLoop, this, 60, 1);
+	emscripten_set_main_loop_arg(webLoop, this, 0, 1);
 	return 0;
 }
 

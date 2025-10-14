@@ -22,7 +22,7 @@ private:
 
 public:
 	GLWrapper(int width, int height, const char *title, void* rawbw);
-	~GLWrapper();
+	~GLWrapper();//
 
 	void setFPS(double fps) {
 		this->fps = fps;

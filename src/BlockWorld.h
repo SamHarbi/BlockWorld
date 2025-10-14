@@ -29,7 +29,7 @@ public:
     GLfloat cam_z;
 
     //Perlin Settings controllable by user 
-    int heightmod; //height of terrain 
+    int heightmod; //height of terrain
 
     //Camera Position Incrementals 
     GLfloat cam_x_mod;
@@ -57,6 +57,8 @@ public:
 
     // Define the normal matrix used by Trees lightning
     glm::mat3 normalmatrix;
+
+    glm::mat4 projection;
 
 
 };

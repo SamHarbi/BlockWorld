@@ -255,7 +255,7 @@ void ChunkBlock::drawChunkBlock(int drawmode)
 	glEnableVertexAttribArray(attribute_v_normal);
 	glBindBuffer(GL_ARRAY_BUFFER, normalsBufferObject);
 	glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	/* Bind Instance data */
+	/* Bind Instance data */ 
 	glEnableVertexAttribArray(attribute_v_instance);
 	glBindBuffer(GL_ARRAY_BUFFER, instanceData);
 	glVertexAttribPointer(attribute_v_instance, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);

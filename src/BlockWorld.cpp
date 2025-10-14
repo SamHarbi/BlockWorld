@@ -51,6 +51,15 @@ bool loadCubeMap(GLuint& texID, vector<std::string> faces);
 
 double GLOBAL_horizontalCam;
 double GLOBAL_verticalCam;
+GLfloat GLOBAL_cam_x;
+GLfloat GLOBAL_cam_y;
+GLfloat GLOBAL_cam_z;
+GLfloat GLOBAL_cam_x_mod;
+GLfloat GLOBAL_cam_y_mod;
+GLfloat GLOBAL_cam_z_mod;
+int GLOBAL_heightmod;
+int GLOBAL_colourmode;
+GLuint GLOBAL_drawmode;
 
 BlockWorld::BlockWorld() {
 	cube = Cube(true);
@@ -169,7 +178,7 @@ bool load_texture(const char* filename, GLuint& texID, bool bGenMipmaps)
 }
 
 //Generate positions at which chunks need to be drawn 
-static void generateMegaChunk(bool origin, glm::vec3 direction, ChunkBlock chunkblock, glm::vec3 chunkOrigin, BlockWorld *bw)
+static void generateMegaChunk(bool origin, glm::vec3 direction, BlockWorld *bw)
 {
 	/*
 		Mega Chunk Structure
@@ -185,18 +194,18 @@ static void generateMegaChunk(bool origin, glm::vec3 direction, ChunkBlock chunk
 		chunks use perlin noise based on world position so the terrain looks continous irrespective of how chunks movement and regeneration
 	*/
 	
-	int chunkSize = chunkblock.getChunkSize(); //Get size of a single chunk, default is defined as 16
+	int chunkSize = bw->chunkblock.getChunkSize(); //Get size of a single chunk, default is defined as 16
 	glm::vec3 ip = glm::vec3(0, 0, 0); 
 	
 	if (origin == true)
 	{
 		ip = glm::vec3(bw->cam_x - chunkSize / 2, -20, bw->cam_z - chunkSize / 2); //Calculate where the new middle chunk should be based on cam positon
-		chunkOrigin = glm::vec3(ip.x, ip.y, ip.z);
+		bw->chunkOrigin = glm::vec3(ip.x, ip.y, ip.z);
 	}
 	else
 	{
-		ip = glm::vec3(chunkOrigin.x + direction.x, chunkOrigin.y + direction.y, chunkOrigin.z + direction.z); //Move whole mega chunk towards a direction
-		chunkOrigin = glm::vec3(ip.x, ip.y, ip.z);
+		ip = glm::vec3(bw->chunkOrigin.x + direction.x, -20, bw->chunkOrigin.z + direction.z); //Move whole mega chunk towards a direction
+		bw->chunkOrigin = glm::vec3(ip.x, ip.y, ip.z);
 	}
 		
 	//Define actual positions of chunks 
@@ -261,7 +270,7 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 	bw->tree2.load_obj("Models/SM_Env_Tree_01.obj");
 
 	//Create initial terrain megachunk positions using inital position
-	generateMegaChunk(true, bw->chunkOrigin, bw->chunkblock, bw->chunkOrigin, bw);
+	generateMegaChunk(true, bw->chunkOrigin, bw);
 
 	// This is the location of the texture object (TEXTURE0), i.e. tex1 will be the name
 	// of the sampler in the fragment shader
@@ -355,6 +364,21 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 		exit(0);
 	}
 
+	GLOBAL_horizontalCam = bw->horizontalCam;
+	GLOBAL_verticalCam = bw->verticalCam;
+	GLOBAL_cam_x = bw->cam_x;
+	GLOBAL_cam_y = bw->cam_y;
+	GLOBAL_cam_z = bw->cam_z;
+	GLOBAL_cam_x_mod = bw->cam_x_mod;
+	GLOBAL_cam_y_mod = bw->cam_y_mod;
+	GLOBAL_cam_z_mod = bw->cam_z_mod;
+	GLOBAL_heightmod = bw->heightmod;
+	GLOBAL_colourmode = bw->colourmode;
+	GLOBAL_drawmode = bw->drawmode;
+
+	//Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	bw->projection = perspective(radians(90.0f), bw->aspect_ratio, 0.1f, 100.0f);
+
 	Menu(); //Display Controls Menu
 
 }
@@ -390,7 +414,7 @@ static void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoa
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
 	//Render 5 Trees 
-	for (int i = 1; i < 5; i++)
+	for (int i = 1; i < 3; i++)
 	{
 		//Get Position of a top block of previously rendered chunk
 		vec3 pos = bw->chunkblock.getTranslations((14 + 15 * 16) * (i * 2));
@@ -406,7 +430,7 @@ static void display_Trees(mat4 view, mat4 lightview, mat4 projection, TinyObjLoa
 			glUniformMatrix3fv(bw->normalMatrixID, 1, GL_FALSE, &(bw->normalmatrix[0][0]));
 
 			//Draw one of two tree models 
-			if (i > 2)
+			if (i > 1)
 			{
 				alt_tree.drawObject(bw->drawmode);
 			}
@@ -454,21 +478,21 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	//X Bounds
 	if (bw->cam_x > 32 + bw->megaChunk[5].x)
 	{
-		generateMegaChunk(false, glm::vec3(16, 0, 0), bw->chunkblock, bw->chunkOrigin, bw);
+		generateMegaChunk(false, glm::vec3(16, 0, 0), bw);
 	}
 	else if (bw->cam_x < bw->megaChunk[5].x + 16)
 	{
 		glm::vec3 dir = glm::vec3(-16, 0, 0);
-		generateMegaChunk(false, dir, bw->chunkblock, bw->chunkOrigin, bw);
+		generateMegaChunk(false, dir, bw);
 	}
 	//Z Bounds
-	if (bw->cam_z > 16 + bw->megaChunk[5].z)
+	if (bw->cam_z > bw->megaChunk[5].z)
 	{
-		generateMegaChunk(false, glm::vec3(0, 0, 16), bw->chunkblock, bw->chunkOrigin, bw);
+		generateMegaChunk(false, glm::vec3(0, 0, 16), bw);
 	}
 	else if (bw->cam_z < bw->megaChunk[5].z)
 	{
-		generateMegaChunk(false, glm::vec3(0, 0, -16), bw->chunkblock, bw->chunkOrigin, bw);
+		generateMegaChunk(false, glm::vec3(0, 0, -16), bw);
 	}
 
 	//Bind Grass Block texture
@@ -551,16 +575,13 @@ static void display(void* rawbw)
 	glClearColor(102.0f/255.0f, 153.0f/255.0f, 255.0f/255.0f, 1.0f);
 
 	/* Clear the colour and frame buffers */
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Create vec3 from camera position components 
 	vec3 camPos = vec3(bw->cam_x, bw->cam_y, bw->cam_z);
 
 	//Camera Direction
 	vec3 camDirection = vec3(cos(bw->verticalCam) * sin(bw->horizontalCam), sin(bw->verticalCam), cos(bw->verticalCam) * cos(bw->horizontalCam));
-
-	//Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	mat4 projection = perspective(radians(90.0f), bw->aspect_ratio, 0.1f, 100.0f);
 
 	//Used to calculate the correct Head up position
 	vec3 right = vec3(
@@ -586,13 +607,26 @@ static void display(void* rawbw)
 		vec3(1, 1, 1)
 	);
 
+	bw->horizontalCam = GLOBAL_horizontalCam;
+	bw->verticalCam = GLOBAL_verticalCam;
+	bw->cam_x = GLOBAL_cam_x;
+	bw->cam_y = GLOBAL_cam_y;
+	bw->cam_z += 0.01;
+	GLOBAL_cam_x_mod = bw->cam_x_mod;
+	GLOBAL_cam_y_mod = bw->cam_y_mod;
+	GLOBAL_cam_z_mod = bw->cam_z_mod;
+	bw->heightmod = GLOBAL_heightmod;
+	bw->colourmode = GLOBAL_colourmode;
+	bw->drawmode = GLOBAL_drawmode;
+
 	//Call display subfunctions that render each part of the scene with different shader programs and other variations
 
-	display_SkyBox(up, camPos, camDirection, projection, bw);
+	display_SkyBox(up, camPos, camDirection, bw->projection, bw);
 
 
-	display_Terrain(view, lightview, camPos, camDirection, projection, bw);
+	display_Terrain(view, lightview, camPos, camDirection, bw->projection, bw);
 
+	bw->cam_z += 0.1;
 
 	// Disable everything
 	//glBindTexture(GL_TEXTURE_2D, 0);
@@ -603,9 +637,6 @@ static void display(void* rawbw)
 	bw->cam_x_mod = camDirection.x;
 	bw->cam_y_mod = camDirection.y;
 	bw->cam_z_mod = camDirection.z;
-
-	bw->horizontalCam = GLOBAL_horizontalCam;
-	bw->verticalCam = GLOBAL_verticalCam;
 }
 
 /*
@@ -614,17 +645,17 @@ static void display(void* rawbw)
 */
 static void mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
-	int height, width;
-	float mouseSpeed = 0.01f;
-	glfwGetWindowSize(window, &width, &height);
+	// int height, width; 
+	// float mouseSpeed = 0.01f; 
+	// glfwGetWindowSize(window, &width, &height); 
 
-	double deltaTime = glfwGetTime();
-	glfwSetTime(0);
+	// double deltaTime = glfwGetTime();
+	// glfwSetTime(0);
 
-	GLOBAL_horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
-	GLOBAL_verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
+	// GLOBAL_horizontalCam += (mouseSpeed * deltaTime * (width / 2 - xpos));
+	// GLOBAL_verticalCam += (mouseSpeed * deltaTime * (height / 2 - ypos));
 
-	glfwSetCursorPos(window, width/2, height/2);
+	// glfwSetCursorPos(window, width/2, height/2);
 	
 }
 
@@ -639,47 +670,47 @@ static void reshape(GLFWwindow* window, int w, int h)
 /* change view angle, exit upon ESC */
 static void keyCallback(GLFWwindow* window, int key, int s, int action, int mods)
 {
-	// BlockWorld* bw = static_cast<BlockWorld*>(rawbw);
-	// /* Enable this call if you want to disable key responses to a held down key*/
-	// //if (action != GLFW_PRESS) return;
+	/* Enable this call if you want to disable key responses to a held down key*/
+	//if (action != GLFW_PRESS) return;
+	
 
-	// if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	// 	glfwSetWindowShouldClose(window, GL_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
 
 	// if (key == 'W') //Move forward, apply direction looked at by camera as forward vector
 	// {
-	// 	bw->cam_x += bw->cam_x_mod;
-	// 	bw->cam_z += bw->cam_z_mod;
-	// 	bw->cam_y += bw->cam_y_mod;
+	// 	GLOBAL_cam_x += GLOBAL_cam_x_mod;
+	// 	GLOBAL_cam_z += GLOBAL_cam_z_mod;
+	// 	GLOBAL_cam_y += GLOBAL_cam_y_mod;
 	// }
 	// if (key == 'S') //Move Backward, same as forward but opposite
 	// {
-	// 	bw->cam_x -= bw->cam_x_mod;
-	// 	bw->cam_z -= bw->cam_z_mod;
-	// 	bw->cam_y -= bw->cam_y_mod;
+	// 	GLOBAL_cam_x -= GLOBAL_cam_x_mod;
+	// 	GLOBAL_cam_z -= GLOBAL_cam_z_mod;
+	// 	GLOBAL_cam_y -= GLOBAL_cam_y_mod;
 	// }
 
-	// if (key == 'H' && action != GLFW_PRESS) //Increase Perlin Height modifier
-	// {
-	// 	bw->heightmod++;
-	// 	if (bw->heightmod > 30)
-	// 	{
-	// 		bw->heightmod = 10;
-	// 	}
-	// }
+	if (key == 'H' && action != GLFW_PRESS) //Increase Perlin Height modifier
+	{
+		GLOBAL_heightmod++;
+		if (GLOBAL_heightmod > 30)
+		{
+			GLOBAL_heightmod = 10;
+		}
+	}
 
-	// if (key == 'M' && action != GLFW_PRESS)
-	// {
-	// 	bw->colourmode = !bw->colourmode;
-	// 	cout << "colourmode=" << bw->colourmode << endl;
-	// }
+	if (key == 'M' && action != GLFW_PRESS)
+	{
+		GLOBAL_colourmode = !GLOBAL_colourmode;
+		cout << "colourmode=" << GLOBAL_colourmode << endl;
+	}
 
-	// /* Cycle between drawing vertices, mesh and filled polygons */
-	// if (key == 'N' && action != GLFW_PRESS)
-	// {
-	// 	bw->drawmode++;
-	// 	if (bw->drawmode > 2) bw->drawmode = 0;
-	// }
+	/* Cycle between drawing vertices, mesh and filled polygons */
+	if (key == 'N' && action != GLFW_PRESS)
+	{
+		GLOBAL_drawmode++;
+		if (GLOBAL_drawmode > 2) GLOBAL_drawmode = 0;
+	}
 
 }
 

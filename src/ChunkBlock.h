@@ -37,7 +37,7 @@ class ChunkBlock
 		GLuint texCoordsObject;
 		GLuint instanceData;
 
-		GLuint attribute_v_coord;
+		GLuint attribute_v_coord; 
 		GLuint attribute_v_normal;
 		GLuint attribute_v_colours;
 		GLuint attribute_v_instance;
