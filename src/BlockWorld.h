@@ -60,5 +60,10 @@ public:
 
     glm::mat4 projection;
 
+    glm::mat4 view;
+    vec3 camPos;
+    vec3 camDirection;
+    vec3 up;
+
 
 };

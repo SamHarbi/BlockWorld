@@ -60,6 +60,7 @@ GLfloat GLOBAL_cam_z_mod;
 int GLOBAL_heightmod;
 int GLOBAL_colourmode;
 GLuint GLOBAL_drawmode;
+float GLOBAL_LightMode;
 
 BlockWorld::BlockWorld() {
 	cube = Cube(true);
@@ -602,7 +603,7 @@ static void display(void* rawbw)
 
 	//Used to calculate light 
 	mat4 lightview = lookAt(
-		vec3(-8, 4, 2),
+		vec3(20, GLOBAL_LightMode, GLOBAL_LightMode),
 		vec3(1, 0, 1),
 		vec3(1, 1, 1)
 	);
@@ -611,7 +612,7 @@ static void display(void* rawbw)
 	bw->verticalCam = GLOBAL_verticalCam;
 	bw->cam_x = GLOBAL_cam_x;
 	bw->cam_y = GLOBAL_cam_y;
-	bw->cam_z += 0.01;
+	bw->cam_z += 0.1;
 	GLOBAL_cam_x_mod = bw->cam_x_mod;
 	GLOBAL_cam_y_mod = bw->cam_y_mod;
 	GLOBAL_cam_z_mod = bw->cam_z_mod;
@@ -625,8 +626,6 @@ static void display(void* rawbw)
 
 
 	display_Terrain(view, lightview, camPos, camDirection, bw->projection, bw);
-
-	bw->cam_z += 0.1;
 
 	// Disable everything
 	//glBindTexture(GL_TEXTURE_2D, 0);
@@ -710,6 +709,12 @@ static void keyCallback(GLFWwindow* window, int key, int s, int action, int mods
 	{
 		GLOBAL_drawmode++;
 		if (GLOBAL_drawmode > 2) GLOBAL_drawmode = 0;
+	}
+
+	if (key == 'L' && action != GLFW_PRESS)
+	{
+		GLOBAL_LightMode++;
+		if (GLOBAL_LightMode > 20) GLOBAL_LightMode = 0;
 	}
 
 }
