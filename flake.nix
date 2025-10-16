@@ -1,5 +1,5 @@
 {
-  description = "CMAKE/GLFW/GCC Development Environment Flake";
+  description = "Emscripten Development Environment Flake with latest features";
   # Need to address this issue to make this flake fully functional:
   # https://github.com/NixOS/nixpkgs/issues/139943
 

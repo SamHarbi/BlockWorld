@@ -25,7 +25,7 @@ ChunkBlock::ChunkBlock()
 	attribute_v_normal = 2;
 	attribute_v_instance = 3;
 
-	positionBufferObject = 0;
+	positionBufferObject = 0;//
 	colourObject = 0;
 	normalsBufferObject = 0;
 	texCoordsObject = 0;
@@ -35,6 +35,9 @@ ChunkBlock::ChunkBlock()
 
 	//Single Small Cube 
 	numvertices = 12;
+
+	srand(static_cast<unsigned int>(time(0)));
+	siv::PerlinNoise perlin{ 42 };
 
 }
 

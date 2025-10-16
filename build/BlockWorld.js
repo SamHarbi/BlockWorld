@@ -3926,6 +3926,8 @@ async function createWasm() {
       }
     };
 
+  var _emscripten_date_now = () => Date.now();
+
   var GLctx;
   
   var webgl_enable_ANGLE_instanced_arrays = (ctx) => {
@@ -10465,6 +10467,8 @@ var wasmImports = {
   _emscripten_fs_load_embedded_files: __emscripten_fs_load_embedded_files,
   /** @export */
   _tzset_js: __tzset_js,
+  /** @export */
+  emscripten_date_now: _emscripten_date_now,
   /** @export */
   emscripten_glActiveTexture: _emscripten_glActiveTexture,
   /** @export */
