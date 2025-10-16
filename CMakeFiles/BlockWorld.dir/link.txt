@@ -1,1 +1,0 @@
-/nix/store/km08hn1k4z564szb1ylzllm45d1086sd-emscripten-4.0.10/share/emscripten/em++  -sUSE_GLFW=3 --embed-file src/Assets@/  -sWASM=3 -sWASM_BIGINT -sFULL_ES3 -O0 @CMakeFiles/BlockWorld.dir/objects1.rsp -o build/BlockWorld.html

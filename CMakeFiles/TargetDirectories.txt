@@ -1,3 +1,0 @@
-/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles/BlockWorld.dir
-/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles/edit_cache.dir
-/home/sameer/Documents/BlockWorld/BlockWorld/CMakeFiles/rebuild_cache.dir
