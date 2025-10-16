@@ -136,8 +136,12 @@ void webLoop(void* userData) {
 
 
 		// Swap buffers
-		//glfwSwapBuffers(glw->window);
+		glfwSwapBuffers(glw->window);
 		glfwPollEvents();
+
+		glBindVertexArray(0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        glUseProgram(0);
 }
 
 /*

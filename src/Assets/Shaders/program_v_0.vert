@@ -17,6 +17,7 @@ uniform int colourmode;
 
 // Output the vertex colour - to be rasterized into pixel fragments
 out vec4 fcolour;
+out vec4 fposition;
 
 // Output the  texture coordinate - just pass it through
 out vec3 ftexcoord;
@@ -57,5 +58,7 @@ void main()
 
 	// Pas through the texture coordinate
 	ftexcoord = position;
+
+	fposition = gl_Position;
 }
 

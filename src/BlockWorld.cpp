@@ -483,15 +483,14 @@ void display_Terrain(mat4 view, mat4 lightview, vec3 camPos, vec3 camDirection, 
 	}
 	else if (bw->cam_x < bw->megaChunk[5].x + 16)
 	{
-		glm::vec3 dir = glm::vec3(-16, 0, 0);
-		generateMegaChunk(false, dir, bw);
+		generateMegaChunk(false, glm::vec3(-16, 0, 0), bw);
 	}
 	//Z Bounds
-	if (bw->cam_z > bw->megaChunk[5].z)
+	if (bw->cam_z > bw->megaChunk[5].z + 16)
 	{
 		generateMegaChunk(false, glm::vec3(0, 0, 16), bw);
 	}
-	else if (bw->cam_z < bw->megaChunk[5].z)
+	else if (bw->cam_z < bw->megaChunk[5].z -16)
 	{
 		generateMegaChunk(false, glm::vec3(0, 0, -16), bw);
 	}
@@ -537,10 +536,10 @@ void display_SkyBox(vec3 up, vec3 camPos, vec3 camDirection, mat4 projection, Bl
 
 	// Camera matrix - This one is locked to always be at 0, 0, 0 and ignore camera movement 
 	mat4 view = lookAt(
-		vec3(0, 0, 0), //locked position
+		vec3(0, 0, 0), //locked position 
 		vec3(0, 0, 0) + camDirection,
 		up
-	);
+	);//
 
 	// Send our uniforms variables to the currently bound shader,
 	glUniform1ui(bw->colourmodeID[1], bw->colourmode);
@@ -725,22 +724,16 @@ int main(int argc, char* argv[])
 	cout << "[Program Starting!]" << endl;
 	BlockWorld* bw = new BlockWorld();
 	GLWrapper* glw = new GLWrapper(1024, 768, "BlockWorld", (void*)bw);
-	cout << "[GLFW success!]" << endl;
 
-	glw->setMouseCallback(mouseCallback);
+	//glw->setMouseCallback(mouseCallback);
 	glw->setRenderer(display);
 	glw->setKeyCallback(keyCallback);
-	glw->setReshapeCallback(reshape);
-
-	cout << "[Passed 0.0]" << endl;
+	//glw->setReshapeCallback(reshape);
 
 	init(glw, bw);
 
-	cout << "[Passed 1]" << endl;
-
 	glw->eventLoop();
 
-	cout << "[Passed 2]" << endl;
 
 	//delete(glw);
 	//delete(bw)
