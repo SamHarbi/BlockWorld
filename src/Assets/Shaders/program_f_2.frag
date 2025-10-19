@@ -22,18 +22,29 @@ uniform int emitmode;
 const mediump float PI = 3.141592653;
 const mediump float roughness = 0.99;
 
+// Fog parameters, could make them uniforms and pass them into the fragment shader
+mediump float fog_maxdist = 20.0;
+mediump float fog_mindist = 6.0;
+mediump vec4 fog_colour = vec4(0.4, 0.4, 0.4, 1.0);
+
 
 // Output pixel fragment colour
 out mediump vec4 outputColor;
 void main()
 {
+	// Calculate fog
+	mediump float dist = length(fposition.xyz);
+	mediump float fog_factor = (fog_maxdist - dist) /
+                  (fog_maxdist - fog_mindist);
+	fog_factor = clamp(fog_factor, 0.0, 1.0);
+	
 	// Create a vec4(0, 0, 0) for our emmissive light but set to zero unless the emitmode flag is set
 	mediump vec4 emissive = vec4(0);				
 	mediump vec4 fambientcolour = fdiffusecolour * 0.1;
 	
 	// Normalise our input vectors, these may be the same for other BRDFs
 	mediump vec3 normal = normalize(fnormal);
-    mediump vec3 view_dir = normalize(-fposition.xyz);
+    mediump vec3 view_dir = normalize(flightdir.xyz);
     mediump vec3 light_dir = normalize(flightdir);
 	mediump float distancetolight = length(flightdir);
 	
@@ -105,6 +116,6 @@ void main()
 	// Calculate the output colour, includung attenuation on the diffuse and specular components
 	// Note that you may want to exclude the ambient from the attenuation factor so objects
 	// are always visible, or include a global ambient
-	outputColor = (attenuation*(fambientcolour + oren_nayar) + emissive + global_ambient) * texcolour;
+	outputColor = mix(fog_colour ,(attenuation*(fambientcolour + oren_nayar) + emissive + global_ambient) *texcolour, fog_factor);
 
 }

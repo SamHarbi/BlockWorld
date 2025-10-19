@@ -46,5 +46,6 @@ void main()
 
 	// Pas through the texture coordinate
 	ftexcoord = texcoord;
+	fposition = gl_Position.xyz;
 }
 
