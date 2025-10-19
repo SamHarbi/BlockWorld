@@ -11,7 +11,7 @@ in mediump vec3 ftexcoord;
 in mediump vec4 fposition;
 
 // Fog parameters, could make them uniforms and pass them into the fragment shader
-mediump float fog_maxdist = 32.0;
+mediump float fog_maxdist = 20.0;
 mediump float fog_mindist = 6.0;
 mediump vec4 fog_colour = vec4(0.4, 0.4, 0.4, 1.0);
 
