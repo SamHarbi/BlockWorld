@@ -36,8 +36,8 @@ ChunkBlock::ChunkBlock()
 	//Single Small Cube 
 	numvertices = 12;
 
-	srand(static_cast<unsigned int>(time(0)));
-	siv::PerlinNoise perlin{ 42 };
+	const siv::PerlinNoise::seed_type seed = 42u;
+	siv::PerlinNoise perlin{ seed };
 
 }
 
