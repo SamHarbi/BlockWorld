@@ -74,6 +74,8 @@ void Menu()
 	cout << "N Changes rendering mode from triangles, to Lines, to Points and back again" << endl;
 	cout << "Use M to change diffuse colors" << endl;
 	cout << "Use H to cycle Height Modifier of terrain to a maximum value" << endl;
+	cout << "Use L to modify light direction and intensity" << endl;
+	cout << "Use P to pause movement" << endl;
 	cout << "" << endl;
 }
 
