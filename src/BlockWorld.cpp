@@ -49,6 +49,7 @@ using namespace glm;
 bool load_texture(char* filename, GLuint& texID, bool bGenMipmaps);
 bool loadCubeMap(GLuint& texID, vector<std::string> faces);
 
+// Not ideal way to do this, need refactor to ensure pure functions for web loop.
 double GLOBAL_horizontalCam;
 double GLOBAL_verticalCam;
 GLfloat GLOBAL_cam_x;
@@ -61,6 +62,7 @@ int GLOBAL_heightmod;
 int GLOBAL_colourmode;
 GLuint GLOBAL_drawmode;
 float GLOBAL_LightMode;
+float GLOBAL_automove;
 
 BlockWorld::BlockWorld() {
 	cube = Cube(true);
@@ -74,8 +76,8 @@ void Menu()
 	cout << "N Changes rendering mode from triangles, to Lines, to Points and back again" << endl;
 	cout << "Use M to change diffuse colors" << endl;
 	cout << "Use H to cycle Height Modifier of terrain to a maximum value" << endl;
-	cout << "Use L to modify light direction and intensity" << endl;
-	cout << "Use P to pause movement" << endl;
+	cout << "Use L to cycle light" << endl;
+	cout << "Use P to pause/unpause movement" << endl;
 	cout << "" << endl;
 }
 
@@ -378,6 +380,7 @@ static void init(GLWrapper* glw, BlockWorld* bw)
 	GLOBAL_heightmod = bw->heightmod;
 	GLOBAL_colourmode = bw->colourmode;
 	GLOBAL_drawmode = bw->drawmode;
+	GLOBAL_automove = 0.1;
 
 	//Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	bw->projection = perspective(radians(90.0f), bw->aspect_ratio, 0.1f, 100.0f);
@@ -613,7 +616,7 @@ static void display(void* rawbw)
 	bw->verticalCam = GLOBAL_verticalCam;
 	bw->cam_x = GLOBAL_cam_x;
 	bw->cam_y = GLOBAL_cam_y;
-	bw->cam_z += 0.1;
+	bw->cam_z += GLOBAL_automove;
 	GLOBAL_cam_x_mod = bw->cam_x_mod;
 	GLOBAL_cam_y_mod = bw->cam_y_mod;
 	GLOBAL_cam_z_mod = bw->cam_z_mod;
@@ -716,6 +719,16 @@ static void keyCallback(GLFWwindow* window, int key, int s, int action, int mods
 	{
 		GLOBAL_LightMode++;
 		if (GLOBAL_LightMode > 20) GLOBAL_LightMode = 0;
+	}
+
+	// For the automatic movement on the web version
+	if (key == 'P' && action != GLFW_PRESS)
+	{
+		if(GLOBAL_automove) {
+			GLOBAL_automove = 0;
+		} else {
+			GLOBAL_automove += 0.1;
+		}
 	}
 
 }
