@@ -1,0 +1,1 @@
+Note: I still haven't set up the mechanism to produce windows builds. The .zip file here is from an older version of this repo that only targeted windows via Visual Studio. See it here: https://github.com/SamHarbi/Graphics-Assignment2
